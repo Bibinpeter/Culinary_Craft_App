@@ -1,0 +1,16 @@
+List<List<String>> categories = [
+  ['Indian'],
+  ['Arabic'],
+  ['Chinese'],
+  ['Mexican'],
+  ['Italian'],
+  ['Drinks'],
+  ['Russian'],
+  ['Swedish'],
+  ['Burger'],
+  ['Salad'],
+  ['Seafood'],
+  ['Dezert'],
+  ['Biriyani'],
+  ['Eggrelated'],
+];
