@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:prj1/indropages/welcm.dart';
+import 'package:prj1/indropages/dots_jumpind.dart';
 
 class Showp extends StatefulWidget {
   const Showp({Key? key}) : super(key: key);

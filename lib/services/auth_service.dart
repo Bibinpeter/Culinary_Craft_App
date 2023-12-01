@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
-import 'package:prj1/services/database_service.dart';
+
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:prj1/services/database_services.dart';
 
 
 //////////////////////    login + roll base Authentication ///////////
@@ -18,7 +19,7 @@ class AuthService{
       User user = (await firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
           .user!;
-if(user != null && user.uid == '0UU2JGNDeDe0UtQfm556QcSl2Y02'){
+if(user.uid == '0UU2JGNDeDe0UtQfm556QcSl2Y02'){
 
 return UserCredentialConstant.admin;
 } else {
@@ -63,7 +64,7 @@ return UserCredentialConstant.admin;
   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
  if(googleUser==null) throw Null;
-  final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+  final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
 
   
   final credential = GoogleAuthProvider.credential(

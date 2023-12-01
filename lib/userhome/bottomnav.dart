@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:prj1/userhome/user_page1.dart';
-import 'package:prj1/userhome/userp2.dart';
-import 'package:prj1/userhome/userp4.dart';
+import 'package:prj1/userhome/user_p1.dart';
+import 'package:prj1/userhome/user_p3.dart';
+import 'package:prj1/userhome/user_p4.dart';
+import 'package:prj1/userhome/user_p2.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -16,13 +17,13 @@ class _BottomNavState extends State<BottomNav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
+      extendBody: true, 
       body: IndexedStack(
         index: _currentIndex,
-        children: const [
+        children:  [
           UserPage1(),
-          usesP2(),
-      
+        UsesP2(),
+        UsesP3(),
           userP4(),
         ],
       ),
@@ -39,8 +40,9 @@ class _BottomNavState extends State<BottomNav> {
             color: Color.fromARGB(255, 0, 0, 0),
           ),
           Icon(
-            Icons.bookmark_added,
+            Icons.search,
             color: Color.fromARGB(255, 0, 0, 0),
+            size: 25 ,
           ),
           Icon(
             Icons.category,
@@ -140,7 +142,7 @@ class _BounceTabBarState extends State<BounceTabBar>
               width: currentWidth,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.3),
+                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -208,7 +210,7 @@ class _CircleItemPainter extends CustomPainter {
           Center,
           radius,
           Paint()
-            ..color = Color.fromARGB(255, 35, 124, 176)
+            ..color = Color.fromARGB(255, 57, 182, 255)
             ..style = PaintingStyle.stroke
             ..strokeWidth = currentStrokeWidth);
     }

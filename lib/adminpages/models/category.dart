@@ -1,16 +1,20 @@
-List<List<String>> categories = [
+List<List<String>> categoryy = [
   ['Indian'],
   ['Arabic'],
   ['Chinese'],
   ['Mexican'],
-  ['Italian'],
-  ['Drinks'],
   ['Russian'],
-  ['Swedish'],
-  ['Burger'],
   ['Salad'],
-  ['Seafood'],
+  ['Burger'],
   ['Dezert'],
-  ['Biriyani'],
+  ['pizza'],
+  ['dips'],
+  ['drinks'],
+  ['fries'],
+ 
+  ['noodles'],
+  ['sandwitch'],
+  ['wrap'],
   ['Eggrelated'],
+  ['festivalrelated'],
 ];

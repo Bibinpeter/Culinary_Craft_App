@@ -17,13 +17,16 @@ class Recipe extends HiveObject {
   final String category;  
   
   @HiveField(4)
-  final String latest;  
+  final String procedure;  
  
   @HiveField(5)
-  final String festivalrelated;  
+  final String ingredients;  
   
   @HiveField(6)
-  final String time;  
+  final String time;
+
+  // ignore: prefer_typing_uninitialized_variables
+  var categoryy;  
 
 // Constructor
   Recipe({
@@ -31,8 +34,8 @@ class Recipe extends HiveObject {
   required this.description, 
   required this.photo,
   required this.category,
-  required this.latest,
- required this.festivalrelated, 
+  required this.procedure,
+ required this.ingredients, 
  required this.time
  
  }

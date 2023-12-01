@@ -21,8 +21,8 @@ class RecipeAdapter extends TypeAdapter<Recipe> {
       description: fields[1] as String,
       photo: fields[2] as String,
       category: fields[3] as String,
-      latest: fields[4] as String,
-      festivalrelated: fields[5] as String,
+      procedure: fields[4] as String,
+      ingredients: fields[5] as String,
       time: fields[6] as String,
     );
   }
@@ -40,9 +40,9 @@ class RecipeAdapter extends TypeAdapter<Recipe> {
       ..writeByte(3)
       ..write(obj.category)
       ..writeByte(4)
-      ..write(obj.latest)
+      ..write(obj.procedure)
       ..writeByte(5)
-      ..write(obj.festivalrelated)
+      ..write(obj.ingredients)
       ..writeByte(6)
       ..write(obj.time);
   }

@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:prj1/Register.dart';
-import 'package:prj1/adminpages/adminhome.dart';
+import 'package:prj1/adminpages/admingridvw.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
 import 'package:prj1/indropages/widgets/widgets.dart';
-import 'package:prj1/reset_password.dart';
+import 'package:prj1/reset_passwrd.dart';
 import 'package:prj1/services/auth_service.dart';
-import 'package:prj1/services/database_service.dart';
+import 'package:prj1/services/database_services.dart';
 
 class Login extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -271,7 +271,7 @@ class _LoginState extends State<Login> {
           .loginWithUserNameandPassword(email, password)
           .then((value) async {  
         if (value == UserCredentialConstant.user) {
-          QuerySnapshot snapshot =
+          QuerySnapshot snapshot = 
               await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
                   .gettingUserData(email);
           // saving the values to our shared preferences
@@ -285,7 +285,7 @@ class _LoginState extends State<Login> {
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) =>AdminHome()
+                builder: (context) =>const AdminHome()
               ),
               (route) => false);
         } else {

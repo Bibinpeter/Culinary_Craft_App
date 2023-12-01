@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:prj1/adminpages/categorycl.dart';
-import 'package:prj1/adminpages/crud.dart';
+import 'package:prj1/adminpages/categoryclass.dart';
+import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/adminpages/models/category.dart';
 import 'package:prj1/adminpages/models/model.dart';
 
@@ -19,12 +19,12 @@ TextEditingController titleEditingController1 = TextEditingController();
 TextEditingController timeEditingController = TextEditingController();
 TextEditingController descriEditingController = TextEditingController();
 TextEditingController cateEditingController = TextEditingController();
-TextEditingController festiEditingController = TextEditingController();
-TextEditingController latestEditingController = TextEditingController();
+TextEditingController _ingredientsEditingController = TextEditingController();
+TextEditingController _procedureEditingController= TextEditingController();
 
 File? selectImages;
  String dropdownvalue='Indian';
-
+String? categorySelector;
 class _FooddetailsState extends State<Fooddetails> {
   @override
   void initState() {
@@ -36,13 +36,14 @@ class _FooddetailsState extends State<Fooddetails> {
         TextEditingController(text: widget.rrecipes.description);
     cateEditingController =
         TextEditingController(text: widget.rrecipes.category);
-    festiEditingController =
-        TextEditingController(text: widget.rrecipes.festivalrelated);
-    latestEditingController =
-        TextEditingController(text: widget.rrecipes.latest);
+    _ingredientsEditingController =
+        TextEditingController(text: widget.rrecipes.ingredients);
+    _procedureEditingController =
+        TextEditingController(text: widget.rrecipes.procedure);
     selectImages = File(widget.rrecipes.photo);
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(115, 146, 148, 150),
@@ -126,19 +127,20 @@ class _FooddetailsState extends State<Fooddetails> {
                   return null;
                 },
               ),
+              SizedBox(height: 10,), 
                DropDownButtonFields(hintText: "category",
-                listName: categories,
+                listName: categoryy,
                 item: false, 
                 onChanged: (newvalues){
                   setState(() {
                     dropdownvalue=newvalues!;
                   });
                 }),
-            SizedBox(
+            const SizedBox(
                 height: 15,
               ),
               TextFormField(
-                controller: festiEditingController,
+                controller: _ingredientsEditingController,
                 decoration: InputDecoration(
                   labelText: 'festival',
                   fillColor: const Color.fromARGB(255, 255, 255, 255),
@@ -158,7 +160,7 @@ class _FooddetailsState extends State<Fooddetails> {
                 height: 15,
               ),
               TextFormField(
-                controller: latestEditingController,
+                controller: _procedureEditingController,
                 decoration: InputDecoration(
                   labelText: 'latest',
                   fillColor: const Color.fromARGB(255, 255, 255, 255),
@@ -201,9 +203,9 @@ class _FooddetailsState extends State<Fooddetails> {
       time: timeEditingController.text,
       description: descriEditingController.text,
       category: cateEditingController.text,
-      festivalrelated: festiEditingController.text,
-      latest: latestEditingController.text,
-      photo: selectImages!.path,
+      ingredients: _ingredientsEditingController.text,
+      procedure: _procedureEditingController.text,
+      photo: selectImages?.path??"",
     );
 
     int key = getKeyofupdatedrecipe(widget.rrecipes);

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:prj1/Login.dart';
-import 'package:prj1/userhome/hiddendrawer.dart';
+import 'package:prj1/userhome/bottomnav.dart';
 
 const textInputDecoration = InputDecoration(
   labelStyle: TextStyle(color: Color.fromARGB(255, 224, 221, 221), 
@@ -19,16 +19,17 @@ const textInputDecoration = InputDecoration(
 );
 
 void nextScreen(context, page) {
-  Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
 }
 
 void nextScreenReplace(context, page) {
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  HiddenDrawr()),(Route)=>true);
+  // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
+  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  const BottomNav()),(Route)=>true);
 }
 
 void showSnackbar(context, color, message) {
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
+    SnackBar( 
       content: Text(
         message!,
         style: const TextStyle(fontSize: 14),

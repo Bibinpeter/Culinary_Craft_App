@@ -6,7 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:prj1/adminpages/models/model.dart';
 import 'package:prj1/indropages/showp.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
-import 'package:prj1/userhome/hiddendrawer.dart';
+import 'package:prj1/userhome/bottomnav.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Hive.registerAdapter(RecipeAdapter());
@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       debugShowCheckedModeBanner: false,
-      home: _isSignedIn ?  HiddenDrawr(): Showp(),
+      home: _isSignedIn ?  const BottomNav(): const Showp(),
     );
   }
 }
