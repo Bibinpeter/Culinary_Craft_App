@@ -1,12 +1,9 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/adminpages/models/model.dart';
 import 'package:prj1/userhome/country_maplist.dart';
 import 'package:prj1/userhome/details_page.dart';
-
 
 class UsesP3 extends StatefulWidget {
   UsesP3({super.key});
@@ -30,8 +27,8 @@ class _UsesP3State extends State<UsesP3> {
         InkWell(
           onTap: () {
             fetchRecipesByCategory(categoryofFood: post1['names']);
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) =>Details()));
-
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => Details()));
           },
           child: Container(
             height: 150,
@@ -69,26 +66,32 @@ class _UsesP3State extends State<UsesP3> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
-                            child: Image.asset(
-                              "${post1["Flag"]}",
-                              height: 28,
+                            child: FadeInImage(
+                              placeholder: const AssetImage(
+                                  'assets/images/placeholder.png'), // Replace with your local placeholder image path
+                              image: AssetImage(
+                                "${post1["Flag"]}",
+                              ),
+                              // Replace with your actual image path
+                              height: 26,
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                 ClipRRect(
-  borderRadius: BorderRadius.circular(15.0),
-  child: FadeInImage(
-    placeholder: AssetImage('assets/images/placeholder.png'), // Replace with your local placeholder image path
-    image:AssetImage("${post1["image"]}",
-), 
-       // Replace with your actual image path
-    fit: BoxFit.cover,
-  ),
-),
-
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: FadeInImage(
+                      placeholder: const AssetImage(
+                          'assets/images/placeholder.png'), // Replace with your local placeholder image path
+                      image: AssetImage(
+                        "${post1["image"]}",
+                      ),
+                      // Replace with your actual image path
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -113,8 +116,7 @@ class _UsesP3State extends State<UsesP3> {
         topContainer = value;
         closeTopContainer = controller.offset > 50;
         getRecipes();
-        getRecipeFN(); 
-    
+        getRecipeFN();
       });
     });
   }
@@ -130,7 +132,7 @@ class _UsesP3State extends State<UsesP3> {
   Widget build(BuildContext context) {
     // ignore: unnecessary_nullable_for_final_variable_declarations
     final Size size = MediaQuery.of(context).size;
-    final double categoryHeight = size.height * 0.30;
+    final double categoryHeight = size.height * 0.16;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -217,8 +219,6 @@ class _UsesP3State extends State<UsesP3> {
     );
   }
 }
-
- 
 
 class CategoriesScroller1 extends StatelessWidget {
   const CategoriesScroller1({super.key});

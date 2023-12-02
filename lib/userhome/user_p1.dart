@@ -15,8 +15,6 @@ class UserPage1 extends StatefulWidget {
 }
 
 class _UserPage1State extends State<UserPage1> {
-  
- 
   List<Recipe> recipelist = [];
   List<Widget> itemsData = [];
   final CategoriesScroller categoriesScroller = const CategoriesScroller();
@@ -24,8 +22,6 @@ class _UserPage1State extends State<UserPage1> {
   bool closeTopContainer = false;
   double topContainer = 0;
   void getPostsData() {
-    
-    
     List<dynamic> responseList = FOOD_DATA;
     List<Widget> listItems = [];
     for (var post in responseList) {
@@ -35,8 +31,9 @@ class _UserPage1State extends State<UserPage1> {
           InkWell(
         onTap: () {
           fetchRecipesByCategory(categoryofFood: post['name']);
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => BurgerList(selectedCategory: post['name'])));
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  BurgerList(selectedCategory: post['name'],)));
         },
         child: Container(
             height: 150,
@@ -83,15 +80,17 @@ class _UserPage1State extends State<UserPage1> {
                       ),
                     ],
                   ),
-                  Image.asset(
-                    "assets/images/${post["image"]}",
-                    height: double.infinity,
-                  )
+                  FadeInImage(
+  placeholder: AssetImage('assets/images/forkplaceholder.png'), // Replace with your placeholder image
+  image: AssetImage("assets/images/${post["image"]}"),
+  fit: BoxFit.cover,
+  height: double.infinity,
+),
+
                 ],
               ),
             )),
       ));
-      //hide loading state
        
     }
     setState(() {
@@ -109,7 +108,7 @@ class _UserPage1State extends State<UserPage1> {
 
       setState(() {
         topContainer = value;
-        closeTopContainer = controller.offset > 50;
+        closeTopContainer = controller.offset > 90 ;
       });
     });
   }
@@ -172,62 +171,64 @@ class _UserPage1State extends State<UserPage1> {
               height: 5,
             ),
             /////////////////////////////carousel/////////////////////////////
-          CarouselSlider(
-                    options: CarouselOptions(
-                      autoPlay: true,
-                      height: 200,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      autoPlayAnimationDuration:
-                          const Duration(milliseconds: 2000 ),
-                      autoPlayInterval: const Duration(seconds: 3),
-                      enlargeCenterPage: true,
-                      enlargeFactor: 1,
-                      animateToClosest: true,
-                      viewportFraction: 0.9,
-                      onPageChanged: (index, reason) {},
-                    ),
-                    items: <Widget>[
-                            for (int i = 0; i < recipelist.length; i++)
-                              Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: Image.file(
-                                      File(recipelist[i].photo),
-                                      fit: BoxFit.fitWidth,
-                                      width: 370,
-                                    ),
-                                  ),
-                                  Positioned.fill(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                            Colors.transparent,
-                                            Colors.black.withOpacity(0.6)
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    bottom: 10,
-                                    left: 10,
-                                    child: Text(
-                                      recipelist[i].title,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 20,
-                                        color: Colors.white.withOpacity(0.6),
-                                      ),
-                                    ),
-                                  )
+            CarouselSlider(
+              options: CarouselOptions(
+                autoPlay: true,
+                height: 200,
+                autoPlayCurve: Curves.fastOutSlowIn,
+                autoPlayAnimationDuration: const Duration(milliseconds: 2000),
+                autoPlayInterval: const Duration(seconds: 3),
+                enlargeCenterPage: true,
+                enlargeFactor: 1,
+                animateToClosest: true,
+                viewportFraction: 0.9,
+                onPageChanged: (index, reason) {},
+              ),
+              items: <Widget>[
+                for (int i = 0; i < recipelist.length; i++)
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Stack(
+                      children: [
+                        FadeInImage(
+                          fadeInCurve: Curves.bounceInOut,
+                          placeholder:
+                              const AssetImage('assets/images/foodplaceholder.png'),
+                          image: FileImage(File(recipelist[i].photo)),
+                          fit: BoxFit.fitWidth,
+                          width: 370,
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.6),
                                 ],
                               ),
-                          ],
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          left: 10,
+                          child: Text(
+                            recipelist[i].title,
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              color: Colors.white.withOpacity(0.6),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+              ],
+            ),
 
             const SizedBox(
               height: 10,
@@ -237,7 +238,7 @@ class _UserPage1State extends State<UserPage1> {
               child: Text(
                 "Loyality cards",
                 style: GoogleFonts.poppins(
-                    fontSize: 18, color: Color.fromARGB(255, 0, 0, 0)),
+                    fontSize: 18, color: const Color.fromARGB(255, 0, 0, 0)),
               ),
             ),
             AnimatedOpacity(
@@ -294,154 +295,154 @@ class CategoriesScroller extends StatelessWidget {
     final double categoryHeight =
         MediaQuery.of(context).size.height * 0.30 - 50;
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: FittedBox(
-          fit: BoxFit.fill,
-          alignment: Alignment.topCenter,
+        physics: const BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: FittedBox(
+              fit: BoxFit.fill,
+              alignment: Alignment.topCenter,
+              child: Row(children: <Widget>[
+                Container(
+  width: 150,
+  margin: const EdgeInsets.only(right: 20),
+  height: categoryHeight,
+  decoration: const BoxDecoration(
+    
+    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+  ),
+  child: ClipRRect(
+    borderRadius: BorderRadius.circular(20.0),
+    child: Stack(
+      children: <Widget>[
+        const FadeInImage(
+          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replaced with my placeholder image.
+          image: AssetImage("assets/images/Imaginary World Through My Iphone.jpeg"),
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(right: 20),
-                height: categoryHeight,
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade400,
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+              Padding(
+                padding: const EdgeInsets.only(
+                  right: 0,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/Imaginary World Through My Iphone.jpeg',
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                right: 0,
-                              ),
-                              child: Text(
-                                "Favorites",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Icon(
-                              Icons.favorite,
-                              color: Color.fromARGB(255, 208, 20, 7),
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                child: Text(
+                  "Favorites",
+                  style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(right: 20),
-                height: categoryHeight,
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade400,
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/Advertising.jpeg', // Replace with the path to your image
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                right: 30,
-                              ),
-                              child: Text(
-                                "Latest",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              const SizedBox(
+                width: 10,
               ),
-              Container(
-                width: 150,
-                margin: const EdgeInsets.only(right: 20),
-                height: categoryHeight,
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade400,
-                  borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Stack(
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/Alex Lau Food — 2D Creative Artists.jpeg', // Replace with the path to your image
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                right: 30,
-                              ),
-                              child: Text(
-                                "Super\nSaved",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              const Icon(
+                Icons.favorite,
+                color: Color.fromARGB(255, 208, 20, 7),
+              )
             ],
           ),
         ),
-      ),
-    );
+      ],
+    ),
+  ),
+),
+
+                Container(
+                  width: 150,
+                  margin: const EdgeInsets.only(right: 20),
+                  height: categoryHeight,
+                  decoration: const BoxDecoration(
+                    
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Stack(
+                      children: <Widget>[
+                        const FadeInImage(
+          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
+          image: AssetImage("assets/images/Advertising.jpeg"),
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 30,
+                                ),
+                                child: Text(
+                                  "Latest",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  width: 150,
+                  margin: const EdgeInsets.only(right: 20),
+                  height: categoryHeight,
+                  decoration: const BoxDecoration(
+                     
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Stack(
+                      children: <Widget>[
+                       const FadeInImage(
+          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
+          image: AssetImage("assets/images/Alex Lau Food — 2D Creative Artists.jpeg"),
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 30,
+                                ),
+                                child: Text(
+                                  "Super\nSaved",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight
+                                        .w500, // Use `weight` instead of `fontWeight`
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ]),
+            )));
   }
 }
-
- 

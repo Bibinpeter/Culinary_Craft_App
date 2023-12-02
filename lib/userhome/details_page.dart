@@ -24,11 +24,12 @@ class _DetailsState extends State<Details> {
         body: Stack(
       children: <Widget>[
         //////////////////////////////////////background image.................
-        Image.asset(
-          "assets/images/julius-9zy3GaH8NKM-unsplash.jpg",
-          fit: BoxFit.cover,
+       FadeInImage(
+          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
+          image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
           width: double.infinity,
           height: double.infinity,
+          fit: BoxFit.cover,
         ),
         Container(
           width: double.infinity,
@@ -65,10 +66,13 @@ class _DetailsState extends State<Details> {
                       fit: StackFit.expand,
                       children: [
                         // Place the ColorFiltered Container below the Image
-                        Image.asset(
-                          "assets/images/julius-9zy3GaH8NKM-unsplash.jpg",
-                          fit: BoxFit.cover,
-                        ),
+                      FadeInImage(
+          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
+          image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
+          width: double.infinity,
+          height: double.infinity,
+          fit: BoxFit.cover,
+        ),
                         Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(

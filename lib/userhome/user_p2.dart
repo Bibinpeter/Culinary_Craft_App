@@ -89,6 +89,7 @@ class _UsesP2State extends State<UsesP2> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 13, vertical: 13),
                       child: GridView.builder(
+                        physics: BouncingScrollPhysics(),
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                           childAspectRatio: 1 / 0.90,
                           crossAxisCount: 2,
