@@ -20,10 +20,12 @@ class Recipe extends HiveObject {
   final String procedure;  
  
   @HiveField(5)
-  final String ingredients;  
+  final String incredients;  
   
   @HiveField(6)
   final String time;
+
+   
 
   // ignore: prefer_typing_uninitialized_variables
   var categoryy;  
@@ -35,8 +37,9 @@ class Recipe extends HiveObject {
   required this.photo,
   required this.category,
   required this.procedure,
- required this.ingredients, 
- required this.time
+ required this.incredients, 
+ required this.time,
+  
  
  }
 );

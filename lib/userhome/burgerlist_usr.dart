@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
+import 'package:prj1/adminpages/models/model.dart';
 import 'package:prj1/userhome/constrains_usrp1.dart';
 import 'package:prj1/userhome/product_details.dart';
 
@@ -17,6 +18,7 @@ class BurgerList extends StatefulWidget {
 class _BurgerListState extends State<BurgerList> {
   late ScrollController _scrollController;
   late Map<String, dynamic> post;
+  List<Recipe> allRecipes = [];
 
   @override
   void initState() {
@@ -64,7 +66,7 @@ class _BurgerListState extends State<BurgerList> {
                     title: Padding(
                       padding: const EdgeInsets.only(right: 40),
                       child: Text(
-                        "${"Your " + post["name"]}  List",
+                        "${"Your " + post["name"]}List",
                         style: GoogleFonts.poppins(
                           fontSize: 22,
                           color: const Color.fromARGB(255, 255, 255, 255),
@@ -111,7 +113,7 @@ class _BurgerListState extends State<BurgerList> {
 
                     return InkWell(
                       onTap: () {
-                        Navigator.of(context).push(_createPageRoute());
+                        Navigator.of(context).push(_createPageRoute(category));
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -142,14 +144,13 @@ class _BurgerListState extends State<BurgerList> {
                                         ).createShader(bounds);
                                       },
                                       blendMode: BlendMode.dstIn,
-                                      child:FadeInImage(
-                 placeholder: AssetImage('assets/images/foodeshh.png'), // Replace with your placeholder image
-                    image: FileImage(File(imageUrl)),
-                          fit: BoxFit.cover,
-                                      height: 200,
-                                    width: double.infinity,
-                                    ),
-
+                                      child: FadeInImage(
+                                        placeholder: const AssetImage('assets/images/foodplaceholder.png'), // Replace with your placeholder image
+                                        image: FileImage(File(imageUrl)),
+                                        fit: BoxFit.cover,
+                                        height: 200,
+                                        width: double.infinity,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -199,10 +200,10 @@ class _BurgerListState extends State<BurgerList> {
     );
   }
 
-  PageRouteBuilder _createPageRoute() {
+  PageRouteBuilder _createPageRoute(category) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) {
-        return ProductItemScreen();
+        return ProductItemScreen(recipe: category);
       },
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);

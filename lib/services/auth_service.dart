@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:prj1/services/database_services.dart';
 
 
-//////////////////////    login + roll base Authentication ///////////
+//////////////////////roll base Authentication ///////////
 
 
 enum UserCredentialConstant{user,admin,error} 
@@ -23,7 +23,8 @@ if(user.uid == '0UU2JGNDeDe0UtQfm556QcSl2Y02'){
 
 return UserCredentialConstant.admin;
 } else {
-  return UserCredentialConstant.user;}
+  return UserCredentialConstant.user;
+  }
   } 
   
   on FirebaseAuthException{

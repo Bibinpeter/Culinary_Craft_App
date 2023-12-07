@@ -6,7 +6,7 @@ import 'package:prj1/adminpages/categoryclass.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/adminpages/models/category.dart';
 import 'package:prj1/adminpages/models/model.dart';
-
+ 
 class Fooddetails extends StatefulWidget {
   Fooddetails({super.key, required this.rrecipes});
   final Recipe rrecipes;
@@ -37,7 +37,7 @@ class _FooddetailsState extends State<Fooddetails> {
     cateEditingController =
         TextEditingController(text: widget.rrecipes.category);
     _ingredientsEditingController =
-        TextEditingController(text: widget.rrecipes.ingredients);
+        TextEditingController(text: widget.rrecipes.incredients);
     _procedureEditingController =
         TextEditingController(text: widget.rrecipes.procedure);
     selectImages = File(widget.rrecipes.photo);
@@ -127,7 +127,7 @@ class _FooddetailsState extends State<Fooddetails> {
                   return null;
                 },
               ),
-              SizedBox(height: 10,), 
+              const SizedBox(height: 10,), 
                DropDownButtonFields(hintText: "category",
                 listName: categoryy,
                 item: false, 
@@ -142,9 +142,9 @@ class _FooddetailsState extends State<Fooddetails> {
               TextFormField(
                 controller: _ingredientsEditingController,
                 decoration: InputDecoration(
-                  labelText: 'festival',
+                  labelText: 'ingredients',
                   fillColor: const Color.fromARGB(255, 255, 255, 255),
-                  hintText: "festival",
+                  hintText: "ingredients",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),
@@ -162,9 +162,9 @@ class _FooddetailsState extends State<Fooddetails> {
               TextFormField(
                 controller: _procedureEditingController,
                 decoration: InputDecoration(
-                  labelText: 'latest',
+                  labelText: 'procedure',
                   fillColor: const Color.fromARGB(255, 255, 255, 255),
-                  hintText: "latest",
+                  hintText: "procedure",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(25.0),
                   ),
@@ -197,26 +197,37 @@ class _FooddetailsState extends State<Fooddetails> {
     );
   }
 
-  Future<void> updateRecipedatas() async {
+    Future<void> updateRecipedatas() async {
     final updateRecipedata = Recipe(
       title: titleEditingController1.text,
       time: timeEditingController.text,
       description: descriEditingController.text,
       category: cateEditingController.text,
-      ingredients: _ingredientsEditingController.text,
+      incredients: _ingredientsEditingController.text,
       procedure: _procedureEditingController.text,
       photo: selectImages?.path??"",
+       
     );
 
     int key = getKeyofupdatedrecipe(widget.rrecipes);
     await updateRecipe(updateRecipedata, key);
   }
 
-  int getKeyofupdatedrecipe(Recipe variableReceipes) {
-    var box = Hive.box<Recipe>('recipes');
-    var key = box.keyAt(box.values.toList().toList().indexOf(variableReceipes));
+ int getKeyofupdatedrecipe(Recipe variableReceipes) {
+  var box = Hive.box<Recipe>('recipes');
+  var valuesList = box.values.toList();
+  var index = valuesList.indexOf(variableReceipes);
+
+  if (index != -1) {
+    var key = box.keyAt(index);
     return key;
+  } else {
+    print('Recipe not found in the list: ${variableReceipes.title}');
+    // Handle the not-found scenario
+    throw Exception('Recipe not found in the list: ${variableReceipes.title}');
   }
+}
+
 }
 
 Future<File?> imagePickFromGallery(BuildContext context) async {

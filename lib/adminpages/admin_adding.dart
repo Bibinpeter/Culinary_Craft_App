@@ -232,11 +232,10 @@ class _AdminLoginState extends State<Admin> {
                                       time: _timeEditingController.text,
                                       description: _decorEditingController.text,
                                       category: categorySelector!,
-                                      ingredients:
-                                          _ingredientsEditingController.text,
                                       procedure: _procedureEditingController.text,
                                       // Use an empty string if selectImage is null
                                       photo: selectImage?.path ?? "",
+                                      incredients: _ingredientsEditingController.text,
                                     );
 
                                     // Call the addRecipe method of RecipeData

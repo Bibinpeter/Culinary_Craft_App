@@ -24,7 +24,7 @@ class _DetailsState extends State<Details> {
         body: Stack(
       children: <Widget>[
         //////////////////////////////////////background image.................
-       FadeInImage(
+       const FadeInImage(
           placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
           image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
           width: double.infinity,
@@ -66,7 +66,7 @@ class _DetailsState extends State<Details> {
                       fit: StackFit.expand,
                       children: [
                         // Place the ColorFiltered Container below the Image
-                      FadeInImage(
+                      const FadeInImage(
           placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
           image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
           width: double.infinity,
@@ -80,7 +80,7 @@ class _DetailsState extends State<Details> {
                               end: Alignment.topCenter,
                               colors: [
                                 Colors.black.withOpacity(0.2),
-                                Color.fromARGB(255, 0, 0, 0),
+                                const Color.fromARGB(255, 0, 0, 0),
                               ],
                             ),
                           ),
@@ -117,7 +117,7 @@ class _DetailsState extends State<Details> {
                                   borderRadius: BorderRadius.circular(13),
                                   child: ColorFiltered(
                                     colorFilter: ColorFilter.mode(
-                                      Color.fromARGB(255, 0, 0, 0)
+                                      const Color.fromARGB(255, 0, 0, 0)
                                           .withOpacity(0.2),
                                       BlendMode.multiply,
                                     ),
@@ -134,12 +134,12 @@ class _DetailsState extends State<Details> {
                                       const EdgeInsets.only(top: 150, left: 5),
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.update,
                                         color: Colors.amberAccent,
                                         size: 20,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 5,
                                       ),
                                       Text(
@@ -151,12 +151,12 @@ class _DetailsState extends State<Details> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 170, left: 10),
+                                  padding: const EdgeInsets.only(top: 170, left: 10),
                                   child: Text(
                                     category.title,
                                     style: GoogleFonts.poppins(
                                       fontSize: 18,
-                                      color: Color.fromARGB(255, 255, 255, 255)
+                                      color: const Color.fromARGB(255, 255, 255, 255)
                                           .withOpacity(0.7),
                                       fontWeight: FontWeight.w400,
                                     ),

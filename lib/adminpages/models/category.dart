@@ -11,9 +11,8 @@ List<List<String>> categoryy = [
   ['dips'],
   ['drinks'],
   ['fries'],
- 
   ['noodles'],
-  ['sandwitch'],
+  ['Sandwich'],
   ['wrap'],
   ['Eggrelated'],
   ['festivalrelated'],

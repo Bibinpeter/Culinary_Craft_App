@@ -27,7 +27,7 @@ class _UserPage1State extends State<UserPage1> {
     for (var post in responseList) {
       listItems.add(
 
-          /////////////////////////////////////// inkwell////////////////////////////////////
+          ///////////////////////////////////////fetching the corresponding item////////////////////////////////////
           InkWell(
         onTap: () {
           fetchRecipesByCategory(categoryofFood: post['name']);
@@ -81,7 +81,7 @@ class _UserPage1State extends State<UserPage1> {
                     ],
                   ),
                   FadeInImage(
-  placeholder: AssetImage('assets/images/forkplaceholder.png'), // Replace with your placeholder image
+  placeholder: const AssetImage('assets/images/forkplaceholder.png'), // Replace with your placeholder image
   image: AssetImage("assets/images/${post["image"]}"),
   fit: BoxFit.cover,
   height: double.infinity,
@@ -126,14 +126,32 @@ class _UserPage1State extends State<UserPage1> {
     final double categoryHeight = size.height * 0.30;
     ////////////scaffold//////////////////
     return Scaffold(
-      appBar: AppBar(
-        title: Center(
-            child: Text(
-          "Home",
-          style: GoogleFonts.poppins(color: Colors.black, fontSize: 22),
-        )),
-        backgroundColor: const Color.fromARGB(255, 74, 191, 195),
-      ),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: AppBar(
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 153, 241, 238), // Replace with your desired gradient colors
+                    Color.fromARGB(255, 0, 163, 158),
+                  ],
+                ),
+              ),
+            ),
+            centerTitle: true,
+            title: Text(
+              "Home",
+              style: GoogleFonts.poppins(
+                color: const Color.fromARGB(255, 255, 255, 255), // Text color
+                fontSize: 22,
+               
+              ),
+            ),
+          ),
+        ),
       extendBody: true,
       // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
@@ -164,7 +182,7 @@ class _UserPage1State extends State<UserPage1> {
               child: Text(
                 "Recipes for You",
                 style: GoogleFonts.poppins(
-                    color: const Color.fromARGB(255, 0, 0, 0), fontSize: 18),
+                    color: Color.fromARGB(255, 134, 132, 132), fontSize: 18),
               ),
             ),
             const SizedBox(
@@ -238,7 +256,7 @@ class _UserPage1State extends State<UserPage1> {
               child: Text(
                 "Loyality cards",
                 style: GoogleFonts.poppins(
-                    fontSize: 18, color: const Color.fromARGB(255, 0, 0, 0)),
+                    fontSize: 18, color: Color.fromARGB(255, 70, 69, 69)),
               ),
             ),
             AnimatedOpacity(
@@ -336,7 +354,7 @@ class CategoriesScroller extends StatelessWidget {
                   style: GoogleFonts.poppins(
                       fontSize: 20,
                       color: Colors.white,
-                      fontWeight: FontWeight.w500),
+                    ),
                 ),
               ),
               const SizedBox(
@@ -387,7 +405,7 @@ class CategoriesScroller extends StatelessWidget {
                                   style: GoogleFonts.poppins(
                                       fontSize: 20,
                                       color: Colors.white,
-                                      fontWeight: FontWeight.w500),
+                                    ),
                                 ),
                               ),
                             ],
@@ -402,7 +420,6 @@ class CategoriesScroller extends StatelessWidget {
                   margin: const EdgeInsets.only(right: 20),
                   height: categoryHeight,
                   decoration: const BoxDecoration(
-                     
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   ),
                   child: ClipRRect(

@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -7,17 +6,16 @@ import 'package:prj1/adminpages/models/model.dart';
 import 'package:prj1/indropages/showp.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
 import 'package:prj1/userhome/bottomnav.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Hive.registerAdapter(RecipeAdapter());
   await Hive.initFlutter();
- 
 
   if (kIsWeb) {
-    await Firebase.initializeApp(
-        );
+    await Firebase.initializeApp();
   } else {
-    await Firebase.initializeApp(); 
+    await Firebase.initializeApp();
   }
 
   runApp(const MyApp());
@@ -54,7 +52,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blueGrey),
       debugShowCheckedModeBanner: false,
-      home: _isSignedIn ?  const BottomNav(): const Showp(),
+      home: _isSignedIn ? const BottomNav() : const Showp(),
     );
   }
 }

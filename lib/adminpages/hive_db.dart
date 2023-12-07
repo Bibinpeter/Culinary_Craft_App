@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+
 import 'package:prj1/adminpages/models/model.dart';
 
-ValueNotifier<List<Recipe>> recipenotifier = ValueNotifier([]);
 
+ValueNotifier<List<Recipe>> recipenotifier = ValueNotifier([]);
+  
 Future<void> addRecipe(Recipe values) async {
   final recipeBox = await Hive.openBox<Recipe>('recipes');
   await recipeBox.add(values);
@@ -17,8 +19,8 @@ Future<List<Recipe>> getRecipes() async {
 }
 
 Future<int> getKey(Recipe recipiesToGetKey) async {
-  final recipeBox = await Hive.openBox<Recipe>('recipes');
-  final key =
+  var recipeBox = await Hive.openBox<Recipe>('recipes');
+  var key =
       recipeBox.keyAt(recipeBox.values.toList().indexOf(recipiesToGetKey));
   return key;
 }
@@ -49,9 +51,10 @@ Future<void> fetchRecipesByCategory({required String categoryofFood}) async {
 
   final categryList = box.values
       .toList()
-      .where((food) =>
-          food.category.toLowerCase() == categoryofFood.toLowerCase())
+      .where(
+          (food) => food.category.toLowerCase() == categoryofFood.toLowerCase())
       .toList();
   recipenotifier.value = categryList.toList();
   recipenotifier.notifyListeners();
 }
+ 
