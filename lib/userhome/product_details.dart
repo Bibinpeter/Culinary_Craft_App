@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/adminpages/hive_db.dart';
+import 'package:prj1/models/model.dart';
 
 class ProductItemScreen extends StatefulWidget {
   const ProductItemScreen({
@@ -20,7 +22,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
     with TickerProviderStateMixin {
   late final Recipe culinary;
   final fontesh = GoogleFonts.poppins();
-  bool isFavorite = false;
+  late bool isFavorite ;
 
   late AnimationController _scaleController;
   late Animation<double> _scaleAnimation;
@@ -28,6 +30,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
   @override
   void initState() {
     super.initState();
+    isFavorite = widget.recipe.favoritesUserIds==null?false:widget.recipe.favoritesUserIds!.contains(FirebaseAuth.instance.currentUser!.uid);
     _scaleController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -53,6 +56,8 @@ class _ProductItemScreenState extends State<ProductItemScreen>
 
   void _toggleFavorite() {
   setState(() {
+    addAndRemoveFavorite(widget.recipe);
+    // getFavorites();
     isFavorite = !isFavorite;
     if (isFavorite) {
       _scaleController.forward();
@@ -222,8 +227,8 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                           curve: Curves.easeInOut,
                           decoration: BoxDecoration(
                             color: isFavorite
-                                ? Color.fromARGB(255, 246, 190, 190)
-                                : Color.fromARGB(255, 243, 185, 185),
+                                ? const Color.fromARGB(255, 246, 190, 190)
+                                : const Color.fromARGB(255, 243, 185, 185),
                             shape: BoxShape.circle,
                           ),
                           child: Padding(
@@ -233,8 +238,8 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                               child:  Icon(
                                 Icons.favorite,
                                 color: isFavorite
-                                ? Color.fromARGB(255, 255, 0, 0)
-                                : Color.fromARGB(255, 255, 255, 255),
+                                ? const Color.fromARGB(255, 255, 0, 0)
+                                : const Color.fromARGB(255, 255, 255, 255),
                               ),
                             ),
                           ),

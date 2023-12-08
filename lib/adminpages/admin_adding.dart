@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:prj1/adminpages/categoryclass.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/adminpages/models/category.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/models/model.dart';
 
 class Admin extends StatefulWidget {
   @override
@@ -236,6 +236,7 @@ class _AdminLoginState extends State<Admin> {
                                       // Use an empty string if selectImage is null
                                       photo: selectImage?.path ?? "",
                                       incredients: _ingredientsEditingController.text,
+                                      favoritesUserIds: [],
                                     );
 
                                     // Call the addRecipe method of RecipeData

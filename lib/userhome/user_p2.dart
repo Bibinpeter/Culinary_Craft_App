@@ -1,10 +1,8 @@
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/product_details.dart';
 
 class UsesP2 extends StatefulWidget {

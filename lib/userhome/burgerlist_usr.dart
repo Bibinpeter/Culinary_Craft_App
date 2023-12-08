@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/constrains_usrp1.dart';
 import 'package:prj1/userhome/product_details.dart';
 

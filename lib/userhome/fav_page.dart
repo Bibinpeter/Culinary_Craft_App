@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prj1/adminpages/hive_db.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({Key? key}) : super(key: key);
@@ -8,16 +9,10 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  List<String> favoriteItems = [];
-
-  void _addToFavorites(bool isFavorite, String title) {
-    setState(() {
-      if (isFavorite) {
-        favoriteItems.add(title);
-      } else {
-        favoriteItems.remove(title);
-      }
-    });
+  @override
+  void initState() {
+    super.initState();
+    getFavorites();
   }
 
   @override
@@ -29,43 +24,39 @@ class _FavoritesPageState extends State<FavoritesPage> {
         backgroundColor: Colors.teal, // Set your preferred color
         elevation: 0, // Remove the elevation
       ),
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: favoriteItems.isEmpty
-            ? const Center(
-                child: Text(
-                  'No favorites yet!',
-                  style: TextStyle(fontSize: 18),
-                ),
-              )
-            : ListView.builder(
-                itemCount: favoriteItems.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 3,
-                    margin: EdgeInsets.symmetric(vertical: 8),
-                    child: ListTile(
-                      title: Text(
-                        favoriteItems[index],
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          _removeFromFavorites(index);
-                        },
-                      ),
+      body: ValueListenableBuilder(
+        valueListenable: favoriteNotifier,
+        builder: (context,value,_) {
+          return Container(
+            padding: const EdgeInsets.all(16),               
+            child: value.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No favorites yet!',
+                      style: TextStyle(fontSize: 18),
                     ),
-                  );
-                },
-              ),
-      ),
-    );
-  }
-
-  void _removeFromFavorites(int index) {
-    setState(() {
-      favoriteItems.removeAt(index);
-    });
+                  )
+                : ListView.builder(
+                    itemCount: value.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        elevation: 3,
+                        margin: const EdgeInsets.symmetric(vertical: 8),
+                        child: ListTile(
+                          title: Text(
+                            value[index].title,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.delete),
+                            onPressed: () {
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  )
+          );
+  }),);
   }
 }

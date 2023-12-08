@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/userhome/user_p1.dart';
@@ -19,7 +18,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> { 
   int _currentIndex = 0;
   Future <void> setcurrentuser()async{
-    currentuser=await FirebaseAuth.instance.currentUser!.uid;
+    currentuser= FirebaseAuth.instance.currentUser!.uid;
     getFavorites();
   }
 
@@ -30,10 +29,10 @@ class _BottomNavState extends State<BottomNav> {
       body: IndexedStack(
         index: _currentIndex,
         children:  [
-          UserPage1(),
+           UserPage1(),
         UsesP2(),
         UsesP3(),
-          userP4(),
+           userP4(),
         ],
       ),
       bottomNavigationBar: BounceTabBar(

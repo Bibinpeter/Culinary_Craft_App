@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/country_maplist.dart';
 import 'package:prj1/userhome/details_page.dart';
 

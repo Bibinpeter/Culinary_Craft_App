@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:prj1/adminpages/admingridvw.dart';
 import 'package:prj1/adminpages/categoryclass.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/adminpages/models/category.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/models/model.dart';
  
 class Fooddetails extends StatefulWidget {
   Fooddetails({super.key, required this.rrecipes});
@@ -206,11 +207,12 @@ class _FooddetailsState extends State<Fooddetails> {
       incredients: _ingredientsEditingController.text,
       procedure: _procedureEditingController.text,
       photo: selectImages?.path??"",
-       
+      favoritesUserIds: widget.rrecipes.favoritesUserIds
     );
 
     int key = getKeyofupdatedrecipe(widget.rrecipes);
     await updateRecipe(updateRecipedata, key);
+    foodlists.value = await getRecipes();
   }
 
  int getKeyofupdatedrecipe(Recipe variableReceipes) {
