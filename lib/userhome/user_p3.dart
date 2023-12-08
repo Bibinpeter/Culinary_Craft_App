@@ -116,7 +116,7 @@ class _UsesP3State extends State<UsesP3> {
         topContainer = value;
         closeTopContainer = controller.offset > 50;
         getRecipes();
-        getRecipeFN();
+        
       });
     });
   }
@@ -135,6 +135,7 @@ class _UsesP3State extends State<UsesP3> {
     final double categoryHeight = size.height * 0.16;
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         title: Center(
             child: Text(
           'Category',

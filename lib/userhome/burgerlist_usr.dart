@@ -66,6 +66,7 @@ class _BurgerListState extends State<BurgerList> {
                     title: Padding(
                       padding: const EdgeInsets.only(right: 40),
                       child: Text(
+                        // ignore: prefer_interpolation_to_compose_strings
                         "${"Your " + post["name"]}List",
                         style: GoogleFonts.poppins(
                           fontSize: 22,

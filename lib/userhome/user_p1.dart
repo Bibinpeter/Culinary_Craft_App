@@ -6,6 +6,7 @@ import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/adminpages/models/model.dart';
 import 'package:prj1/userhome/burgerlist_usr.dart';
 import 'package:prj1/userhome/constrains_usrp1.dart';
+import 'package:prj1/userhome/fav_page.dart';
 
 class UserPage1 extends StatefulWidget {
   const UserPage1({super.key});
@@ -129,6 +130,7 @@ class _UserPage1State extends State<UserPage1> {
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(60.0),
           child: AppBar(
+            elevation: 0,
             flexibleSpace: Container(
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
@@ -316,61 +318,64 @@ class CategoriesScroller extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            margin:  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: FittedBox(
               fit: BoxFit.fill,
               alignment: Alignment.topCenter,
               child: Row(children: <Widget>[
-                Container(
-  width: 150,
-  margin: const EdgeInsets.only(right: 20),
-  height: categoryHeight,
-  decoration: const BoxDecoration(
-    
-    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-  ),
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(20.0),
-    child: Stack(
-      children: <Widget>[
-        const FadeInImage(
-          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replaced with my placeholder image.
-          image: AssetImage("assets/images/Imaginary World Through My Iphone.jpeg"),
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(
-                  right: 0,
-                ),
-                child: Text(
-                  "Favorites",
-                  style: GoogleFonts.poppins(
-                      fontSize: 20,
-                      color: Colors.white,
+                InkWell(
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context) =>FavoritesPage(),)),
+                  child: Container(
+                  width: 150,
+                  margin: const EdgeInsets.only(right: 20),
+                  height: categoryHeight,
+                  decoration: const BoxDecoration(
+                    
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Stack(
+                      children: <Widget>[
+                        const FadeInImage(
+                          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replaced with my placeholder image.
+                          image: AssetImage("assets/images/Imaginary World Through My Iphone.jpeg"),
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                  padding: const EdgeInsets.only(
+                    right: 0,
+                  ),
+                  child: Text(
+                    "Favorites",
+                    style: GoogleFonts.poppins(
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                  ),
+                              ),
+                              const SizedBox(
+                  width: 10,
+                              ),
+                              const Icon(
+                  Icons.favorite,
+                  color: Color.fromARGB(255, 208, 20, 7),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              const Icon(
-                Icons.favorite,
-                color: Color.fromARGB(255, 208, 20, 7),
-              )
-            ],
-          ),
-        ),
-      ],
-    ),
-  ),
-),
+                ),
 
                 Container(
                   width: 150,

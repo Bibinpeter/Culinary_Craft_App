@@ -273,14 +273,27 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                 const SizedBox(
                   height: 10,
                 ),
+                
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: 1,
                   itemBuilder: (context, index) => ingredients(context),
                 ),
+                 const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  child: Divider(
+                    height: 4,
+                  ),
+                ),
+                 Text(
+                  "Procedure", 
+                  style: GoogleFonts.poppins(fontSize: 15),
+                ),
+                Text(widget.recipe.procedure ),
                 const SizedBox(
                   height: 50,
                 ),
+                
               ],
             ),
           ),

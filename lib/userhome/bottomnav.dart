@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/userhome/user_p1.dart';
 import 'package:prj1/userhome/user_p3.dart';
 import 'package:prj1/userhome/user_p4.dart';
@@ -15,9 +18,12 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> { 
   int _currentIndex = 0;
+  Future <void> setcurrentuser()async{
+    currentuser=await FirebaseAuth.instance.currentUser!.uid;
+    getFavorites();
+  }
 
   @override
-  
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true, 

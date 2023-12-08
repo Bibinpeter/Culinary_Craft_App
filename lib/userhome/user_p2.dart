@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
@@ -170,7 +171,7 @@ class _UsesP2State extends State<UsesP2> {
                                                   placeholder: const AssetImage(
                                                       "assets/images/foodplaceholder.png"),
                                                   image: FileImage(File(
-                                                      allRecipes[index].photo)),
+                                                      recipesInCategory[index].photo)),
                                                   width: 140,
                                                   height: 200,
                                                   fit: BoxFit.cover,
@@ -207,4 +208,4 @@ class _UsesP2State extends State<UsesP2> {
       ),
     );
   }
-}
+}   

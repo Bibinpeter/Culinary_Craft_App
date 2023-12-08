@@ -67,7 +67,6 @@ return UserCredentialConstant.admin;
  if(googleUser==null) throw Null;
   final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
 
-  
   final credential = GoogleAuthProvider.credential(
     accessToken: googleAuth?.accessToken,
     idToken: googleAuth?.idToken,

@@ -1,5 +1,6 @@
 // recipe_data.dart
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
@@ -7,6 +8,9 @@ import 'package:prj1/adminpages/models/model.dart';
 
 
 ValueNotifier<List<Recipe>> recipenotifier = ValueNotifier([]);
+ValueNotifier<List<Recipe>> favoriteNotifier=ValueNotifier([]);
+String? currentuser;
+
   
 Future<void> addRecipe(Recipe values) async {
   final recipeBox = await Hive.openBox<Recipe>('recipes');
@@ -58,3 +62,22 @@ Future<void> fetchRecipesByCategory({required String categoryofFood}) async {
   recipenotifier.notifyListeners();
 }
  
+ Future<void> getFavorites() async {
+  final box = await Hive.openBox<Recipe>('recipes');
+  final FavoriteList = box.values
+      .where((food) => food.favoritesUserIds!.contains(currentuser!))
+      .toList();
+  favoriteNotifier.value = FavoriteList;
+}
+
+Future<void> addAndRemoveFavorite(Recipe recipe) async {
+  
+  if (recipe.favoritesUserIds!.contains(currentuser!)) {
+    recipe.favoritesUserIds!.remove(currentuser);
+  } else {
+    recipe.favoritesUserIds!.add(currentuser!);
+  }
+  print('fav user id in ${recipe.title} is ${recipe.favoritesUserIds}');
+  await updateRecipe(recipe, await getKey(recipe));
+  await getFavorites();
+}

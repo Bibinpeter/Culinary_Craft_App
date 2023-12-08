@@ -24,16 +24,48 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favorites'),
+        title: const Text('Favorites'),
+        centerTitle: true,
+        backgroundColor: Colors.teal, // Set your preferred color
+        elevation: 0, // Remove the elevation
       ),
-      body: ListView.builder(
-        itemCount: favoriteItems.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(favoriteItems[index]),
-          );
-        },
+      body: Container(
+        padding: EdgeInsets.all(16),
+        child: favoriteItems.isEmpty
+            ? const Center(
+                child: Text(
+                  'No favorites yet!',
+                  style: TextStyle(fontSize: 18),
+                ),
+              )
+            : ListView.builder(
+                itemCount: favoriteItems.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    elevation: 3,
+                    margin: EdgeInsets.symmetric(vertical: 8),
+                    child: ListTile(
+                      title: Text(
+                        favoriteItems[index],
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          _removeFromFavorites(index);
+                        },
+                      ),
+                    ),
+                  );
+                },
+              ),
       ),
     );
+  }
+
+  void _removeFromFavorites(int index) {
+    setState(() {
+      favoriteItems.removeAt(index);
+    });
   }
 }

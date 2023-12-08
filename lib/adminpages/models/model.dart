@@ -25,7 +25,8 @@ class Recipe extends HiveObject {
   @HiveField(6)
   final String time;
 
-   
+   @HiveField(7)
+  List<String>? favoritesUserIds;
 
   // ignore: prefer_typing_uninitialized_variables
   var categoryy;  
@@ -39,7 +40,7 @@ class Recipe extends HiveObject {
   required this.procedure,
  required this.incredients, 
  required this.time,
-  
+ this.favoritesUserIds,
  
  }
 );
