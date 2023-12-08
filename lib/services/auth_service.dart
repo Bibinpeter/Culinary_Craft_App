@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:prj1/indropages/widgets/helper/helper.dart';
+import 'package:prj1/widgets/helper/helper.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:prj1/services/database_services.dart';
