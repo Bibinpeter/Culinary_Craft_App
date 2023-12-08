@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:prj1/indropages/widgets/helper/helper.dart';
+import 'package:prj1/indropages/widgets/widgets.dart';
 import 'package:prj1/services/auth_service.dart';
-import 'package:prj1/widgets/helper/helper.dart';
-import 'package:prj1/widgets/widgets.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

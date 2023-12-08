@@ -21,14 +21,23 @@ class _FavoritesPageState extends State<FavoritesPage> {
       appBar: AppBar(
         title: const Text('Favorites'),
         centerTitle: true,
-        backgroundColor: Colors.teal, // Set your preferred color
-        elevation: 0, // Remove the elevation
+        backgroundColor: Colors.teal,
+        elevation: 0,
       ),
       body: ValueListenableBuilder(
         valueListenable: favoriteNotifier,
-        builder: (context,value,_) {
+        builder: (context, value, _) {
           return Container(
-            padding: const EdgeInsets.all(16),               
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Color.fromARGB(255, 14, 254, 230),
+                  Color.fromARGB(255, 255, 25, 133),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
             child: value.isEmpty
                 ? const Center(
                     child: Text(
@@ -37,26 +46,41 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     ),
                   )
                 : ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
                     itemCount: value.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 3,
-                        margin: const EdgeInsets.symmetric(vertical: 8),
-                        child: ListTile(
-                          title: Text(
-                            value[index].title,
-                            style: const TextStyle(fontSize: 16),
+                      return Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Container(
+                          width: 150, // Adjust the width as needed
+                          decoration: BoxDecoration(
+                            color: Colors.teal,
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          trailing: IconButton(
-                            icon: const Icon(Icons.delete),
-                            onPressed: () {
-                            },
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                value[index].title,
+                                style: const TextStyle(fontSize: 16, color: Colors.white),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.delete),
+                                onPressed: () {
+                                  // Handle delete action
+                                },
+                                color: Colors.white,
+                              ),
+                            ],
                           ),
                         ),
                       );
                     },
-                  )
+                  ),
           );
-  }),);
+        },
+      ),
+    );
   }
 }
