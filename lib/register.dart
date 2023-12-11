@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
@@ -271,7 +272,7 @@ class LoginState extends State<Register> with SingleTickerProviderStateMixin {
         isloading = true;
       });
       await authService
-          .registerUserWithEmailandPassword(username, email, password)
+          .registerUserWithEmailandPassword(username, email, password,"")
           .then((value) async {
         if (value == true) {
 //////////////////////////////saving to shared preference///////////////////////////////
@@ -279,7 +280,7 @@ class LoginState extends State<Register> with SingleTickerProviderStateMixin {
           await HelperFunctions.saveUserNameSF(username);
           await HelperFunctions.saveUserEmailSF(email);
           // ignore: use_build_context_synchronously
-          nextScreenReplace(context, Page);
+          nextScreenReplace(context, Page, FirebaseAuth.instance.currentUser!.uid);
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {

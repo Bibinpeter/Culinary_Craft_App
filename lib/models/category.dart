@@ -4,9 +4,8 @@ List<List<String>> categoryy = [
   ['Chinese'],
   ['Mexican'],
   ['Russian'],
-  ['Salad'],
   ['Burger'],
-  ['Dezert'],
+  ['Dessert'],
   ['pizza'],
   ['dips'],
   ['drinks'],
@@ -15,5 +14,4 @@ List<List<String>> categoryy = [
   ['Sandwich'],
   ['wrap'],
   ['Eggrelated'],
-  ['festivalrelated'],
 ];

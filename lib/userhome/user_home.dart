@@ -380,8 +380,8 @@ final List<Recipe> recipelist;
                   ),
                 ),
                 InkWell(
-                  onTap: () {List<Recipe> listset=[];
-                    ;for (var v = 0;v< recipelist.length-3;  v++) {
+                  onTap: () { List<Recipe> listset=[];
+                    for (var v = 0;v< recipelist.length-3;  v++) {
                       listset.add(recipelist[v]);
                     }
                     

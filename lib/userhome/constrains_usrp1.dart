@@ -25,7 +25,7 @@ const FOOD_DATA = [
     "image":"fries.png"
   },
   {
-    "name":"Dezert",
+    "name":"Desserts",   
     "brand":"Irresistible Dessert Delights",
    "Time":"49 min",
     "image":"ice_cream.png"

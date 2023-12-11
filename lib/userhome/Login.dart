@@ -282,7 +282,7 @@ class _LoginState extends State<Login> {
           await HelperFunctions.saveUserNameSF(snapshot.docs[0]['email']);
 
           // ignore: use_build_context_synchronously
-          nextScreenReplace(context, Page);
+          nextScreenReplace(context, Page, FirebaseAuth.instance.currentUser!.uid);
         } else if (UserCredentialConstant.admin == value) {
           Navigator.pushAndRemoveUntil(
               context,

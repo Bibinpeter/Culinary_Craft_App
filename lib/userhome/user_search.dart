@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/product_details.dart';
@@ -92,10 +93,12 @@ class _UsesP2State extends State<UsesP2> {
               ),
             ),
             if (filteredRecipes.isEmpty)
+            
               Padding(
                 padding: const EdgeInsets.all(98.0),
-                child: Image.asset("assets/images/Animation - 1698299418630.gif"), 
+                child: Lottie.asset("assets/images/searchnot found.json",),
               )
+              
             else
               Expanded(
                 child: Padding(

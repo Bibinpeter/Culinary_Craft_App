@@ -17,15 +17,14 @@ class _AdminLoginState extends State<Admin> {
   final TextEditingController _timeEditingController = TextEditingController();
   final TextEditingController _decorEditingController = TextEditingController();
   final TextEditingController _categEditingController = TextEditingController();
-  final TextEditingController _ingredientsEditingController =
-      TextEditingController();
-  final TextEditingController _procedureEditingController =
-      TextEditingController();
+  final TextEditingController _ingredientsEditingController =TextEditingController();
+  final TextEditingController _procedureEditingController =TextEditingController();
   final formkey = GlobalKey<FormState>();
   String dropdownvalue='Indian';
 
   File? selectImage;
 
+File? _image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -239,6 +238,7 @@ class _AdminLoginState extends State<Admin> {
                                       photo: selectImage?.path ?? "",
                                       incredients: _ingredientsEditingController.text,
                                       favoritesUserIds: [],
+                                     // ProfileImage: _image?.path ?? "",
                                     );
 
                                     // Call the addRecipe method of RecipeData

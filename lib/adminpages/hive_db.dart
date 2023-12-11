@@ -64,6 +64,7 @@ Future<void> fetchRecipesByCategory({required String categoryofFood}) async {
  
  Future<void> getFavorites() async {
   final box = await Hive.openBox<Recipe>('recipes');
+  // ignore: non_constant_identifier_names
   final FavoriteList = box.values
       .where((food) => food.favoritesUserIds.contains(FirebaseAuth.instance.currentUser!.uid))
       .toList();

@@ -2,13 +2,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prj1/adminpages/hive_db.dart';
-import 'package:prj1/userhome/user_p1.dart';
-import 'package:prj1/userhome/user_p2.dart';
-import 'package:prj1/userhome/user_p3.dart';
-import 'package:prj1/userhome/user_p4.dart';
+import 'package:prj1/userhome/user_home.dart';
+import 'package:prj1/userhome/user_search.dart';
+import 'package:prj1/userhome/user_category.dart';
+import 'package:prj1/userhome/user_profile.dart';
 
 class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+  // final String? userId;
+  const BottomNav({super.key,});
 
   @override
   State<BottomNav> createState() => _BottomNavState();
@@ -18,9 +19,17 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> { 
   int _currentIndex = 0;
+  String userId = '';
   Future <void> setcurrentuser()async{
     currentuser= FirebaseAuth.instance.currentUser!.uid;
     getFavorites();
+  }
+
+  @override
+  void initState() {
+    userId = FirebaseAuth.instance.currentUser!.uid;
+    debugPrint('userId on home: $userId');
+    super.initState();
   }
 
   @override
@@ -33,7 +42,7 @@ class _BottomNavState extends State<BottomNav> {
            UserPage1(),
         UsesP2(),
         UsesP3(),
-           userP4(),
+           userP4(userId: userId),
         ],
       ),
       bottomNavigationBar: BounceTabBar(

@@ -79,7 +79,7 @@ class _BurgerListState extends State<BurgerList> {
                     background: Stack(
                       fit: StackFit.expand,
                       children: [
-                        const FadeInImage(
+                         const FadeInImage(
                           placeholder: AssetImage("assets/images/foodplaceholder.png"),
                           image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
                           width: double.infinity,

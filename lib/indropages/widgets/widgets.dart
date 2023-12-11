@@ -22,9 +22,9 @@ void nextScreen(context, page) {
   Navigator.push(context, MaterialPageRoute(builder: (context) => const Login()));
 }
 
-void nextScreenReplace(context, page) {
+void nextScreenReplace(context, page, userId) {
   // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>  const BottomNav()),(Route)=>true);
+  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) =>   BottomNav( )),(Route)=>true);
 }
 
 void showSnackbar(context, color, message) {

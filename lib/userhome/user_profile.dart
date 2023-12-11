@@ -1,23 +1,58 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:prj1/indropages/widgets/helper/helper.dart';
 import 'package:prj1/services/auth_service.dart';
+import 'package:prj1/services/database_services.dart';
 import 'package:prj1/userhome/Login.dart';
 import 'dart:io';
 
 import 'package:prj1/userhome/profile_update.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 class userP4 extends StatefulWidget {
-  const userP4({Key? key}) : super(key: key);
+  final String? userId;
+  const userP4({Key? key, this.userId}) : super(key: key);
 
   @override
   State<userP4> createState() => _userP4State();
 }
 
 AuthService authService = AuthService();
+Stream<DocumentSnapshot>? userDatastream;
 
 class _userP4State extends State<userP4> {
   File? _image;
+  String? emailofuser;
+  String? nameofuser;
+  // String? userId = FirebaseAuth.instance.currentUser!.uid;
+String? imageUrl;
+String? userProfile;
+  @override
+  void initState() {
+    super.initState();
+    getUserEmailFromSF();
+    getUserNameFromSF();
+    // userId=
+    userDatastream=DatabaseService().getuserdetails(widget.userId??"");
+    debugPrint('id on profile: ${widget.userId}');
+  }
+
+  Future<void> _showImagePicker(BuildContext context) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+
+   try {if (pickedFile != null) {
+      Reference referenceImageToUpLoad=FirebaseStorage.instance.ref().child(widget.userId ??"");
+    await referenceImageToUpLoad.putFile(File(pickedFile.path));
+     imageUrl=await referenceImageToUpLoad.getDownloadURL();
+    }} catch (e) {
+      debugPrint(e.toString());
+    }
+await DatabaseService().userCollection.doc(widget.userId).update({"profile": imageUrl});
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,22 +83,29 @@ class _userP4State extends State<userP4> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 100),
+                          padding: const EdgeInsets.only(bottom:5),
                           child: FloatingActionButton(
-                            elevation: 9, 
-                            backgroundColor:   const Color.fromARGB(255, 48, 162, 151),
+                            elevation: 9,
+                            backgroundColor:
+                                const Color.fromARGB(255, 48, 162, 151),
                             onPressed: () {
                               authService.signOut();
                               Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(builder: (context) => const Login()),
+                                MaterialPageRoute(
+                                    builder: (context) => const Login()),
                                 (route) => false,
                               );
                             },
                             child: const Icon(Icons.logout),
                           ),
                         ),
+                         
                       ],
-                    )
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 70 ),
+                      child: Text('Logout',style: GoogleFonts.poppins(color: Colors.white,),),
+                    ) 
                   ],
                 ),
               ),
@@ -75,7 +117,8 @@ class _userP4State extends State<userP4> {
                   padding: const EdgeInsets.only(top: 60),
                   child: Text(
                     "Profile",
-                    style: GoogleFonts.poppins(color: Colors.white, fontSize: 30),
+                    style:
+                        GoogleFonts.poppins(color: Colors.white, fontSize: 30),
                   ),
                 ),
                 Stack(
@@ -94,19 +137,49 @@ class _userP4State extends State<userP4> {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ProfileUpdatePage(imageFile: _image)),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ProfileUpdatePage(imageFile: _image)),
                           );
                         },
-                        child: CircleAvatar(
-                          backgroundImage: _image != null ? FileImage(_image!) : null,
-                          radius: 20,
+                        child: StreamBuilder(
+                          stream: userDatastream,
+                          builder: (context, snapshot) {
+                            if(snapshot.connectionState == ConnectionState.waiting) {
+                              return Center(child: CircularProgressIndicator(),);
+                            }
+                            if(!snapshot.hasData){
+                               print('no stream');
+                                    return CircleAvatar(
+                              // backgroundImage:
+                              //     userProfile != '' ? NetworkImage(userProfile??"") : null,
+                              backgroundColor: Colors.black,
+                              radius: 20,
+                            ); 
+                            }
+                            if(snapshot.hasData){
+                              final userDataSnapshot=snapshot.data!.data()as Map<String,dynamic>;
+
+                              userProfile= userDataSnapshot['profile'];
+
+                              debugPrint('url on profile: $userProfile');
+
+                           return  CircleAvatar(
+                              backgroundImage:
+                                  userProfile == "" ?  Image.asset('assets/images/Alex Lau Food — 2D Creative Artists.jpeg').image : Image.network(userProfile??"").image,
+                              radius: 20,
+                            ); 
+                            }
+                        return SizedBox();
+                          }
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: CircleAvatar(
-                        backgroundColor: const Color.fromARGB(255, 56, 119, 112),
+                        backgroundColor:
+                            const Color.fromARGB(255, 56, 119, 112),
                         child: IconButton(
                           onPressed: () {
                             _showImagePicker(context);
@@ -118,24 +191,25 @@ class _userP4State extends State<userP4> {
                   ],
                 ),
                 const SizedBox(height: 20),
-                const ProfileDetailCard(
+                ProfileDetailCard(
                   label: 'Username',
-                  value: 'widget.FirebaseAuth.name',
+                  value: nameofuser ??
+                      '', // Use the loaded username or an empty string as a default
                   icon: Icons.abc,
                 ),
-                const ProfileDetailCard(
-                  label: 'Login Date',
-                  value: 'January 1, 2023fvdvdvdvdfvdvdfvdvddfvddfvdfv',
+                ProfileDetailCard(
+                  label: 'Email id',
+                  value: emailofuser ?? '',
                   icon: Icons.abc,
                 ),
-                const ProfileDetailCard(
+                ProfileDetailCard(
                   label: 'Terms and privacy',
                   value: 'FirebaseAuth.instance.currentUser.email',
                   icon: Icons.abc,
                 ),
-                const ProfileDetailCard(
+                ProfileDetailCard(
                   label: 'About',
-                  value: 'Passionate Flutter  vdfvdfvdfvdfvdfv',
+                  value: 'Passionate Flutterkj vdfvdfvdfvdfvdfv',
                   icon: Icons.abc,
                 ),
               ],
@@ -146,23 +220,33 @@ class _userP4State extends State<userP4> {
     );
   }
 
-  Future<void> _showImagePicker(BuildContext context) async {
-    
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+  getUserNameFromSF() async {
+    await HelperFunctions.getUserNameFromSF().then((value) {
+      if (value != null) {
+        setState(() {
+          nameofuser = value;
+        });
+      }
+    });
+  }
 
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-      });
-    }
+  getUserEmailFromSF() async {
+    await HelperFunctions.getUserEmailFromSF().then((value) {
+      if (value != null) {
+        setState(() {
+          emailofuser = value;
+        });
+      }
+    });
   }
 }
 
+// ignore: must_be_immutable
 class ProfileDetailCard extends StatelessWidget {
   final String label;
-  final String value;
+  String value;
   final IconData icon;
-  const ProfileDetailCard({
+  ProfileDetailCard({
     Key? key,
     required this.icon,
     required this.label,
@@ -217,7 +301,8 @@ class HeaderCurvedContainer extends CustomPainter {
           Color.fromARGB(255, 48, 162, 151),
           Color.fromARGB(255, 0, 255, 213),
         ],
-      ).createShader(Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
+      ).createShader(
+          Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
 
     Path path = Path()
       ..relativeLineTo(0, 150)

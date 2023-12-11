@@ -9,12 +9,13 @@ class DatabaseService {
       FirebaseFirestore.instance.collection("users");
 
   // Saving the userdata
-  Future<void> savingUserData(String fullName, String email) async {
+  Future<void> savingUserData(String fullName, String email,String profile) async {
     try {
       await userCollection.doc(uid).set({
         "fullName": fullName,
         "email": email,
         "uid": uid,
+        "profile":profile,
       });
     } catch (error) {
       print("Error saving user data: $error");
@@ -30,6 +31,14 @@ class DatabaseService {
       print("Error getting user data: $error");
       // You might want to throw an exception or handle the error in a way that makes sense for your application
       rethrow;
+    }
+  }
+
+  Stream<DocumentSnapshot>getuserdetails(String uid){
+    if(uid.isNotEmpty){
+      return userCollection.doc(uid).snapshots();
+    }else{
+      return const Stream.empty();
     }
   }
 }

@@ -1,84 +1,78 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:prj1/services/database_services.dart';
 
-
 //////////////////////roll base Authentication ///////////
 
+enum UserCredentialConstant { user, admin, error }
 
-enum UserCredentialConstant{user,admin,error} 
-class AuthService{
-  final FirebaseAuth firebaseAuth =FirebaseAuth.instance;
-
- 
-  Future <UserCredentialConstant>loginWithUserNameandPassword(String email, String password) async {
+class AuthService {
+  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  Future<UserCredentialConstant> loginWithUserNameandPassword(
+      String email, String password) async {
     try {
       // ignore: unused_local_variable
       User user = (await firebaseAuth.signInWithEmailAndPassword(
               email: email, password: password))
           .user!;
-if(user.uid == '0UU2JGNDeDe0UtQfm556QcSl2Y02'){
+      if (user.uid == '0UU2JGNDeDe0UtQfm556QcSl2Y02') {
+        return UserCredentialConstant.admin;
+      } else {
+        return UserCredentialConstant.user;
+      }
+    } on FirebaseAuthException {
+      return UserCredentialConstant.error;
+    }
+  }
 
-return UserCredentialConstant.admin;
-} else {
-  return UserCredentialConstant.user;
-  }
-  } 
-  
-  on FirebaseAuthException{
-    return UserCredentialConstant.error;}
-  }
   //////////////////////////////////////register//////////////////////
   Future registerUserWithEmailandPassword(
-      String fullName, String email, String password) async {
+      String fullName, String email, String password ,String profile) async {
     try {
       User user = (await firebaseAuth.createUserWithEmailAndPassword(
               email: email, password: password))
           .user!;
 
       // call our database service to update the user data.
-      await DatabaseService(uid: user.uid).savingUserData(fullName, email);
+      await DatabaseService(uid: user.uid).savingUserData(fullName, email, profile);
       return true;
-        } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       return e.message;
     }
-    }
+  }
 
-      Future   signOut() async {
+  Future signOut() async {
     try {
       await HelperFunctions.saveUserLoggedInStatus(false);
       await HelperFunctions.saveUserEmailSF("");
       await HelperFunctions.saveUserNameSF("");
-        firebaseAuth.signOut();
+      firebaseAuth.signOut();
     } catch (e) {
-      return e ;
+      return e;
     }
   }
 
+  Future<UserCredential> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
- Future<UserCredential> signInWithGoogle() async {
-  
-  try{
+      if (googleUser == null) throw Null;
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser.authentication;
 
-  final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
- if(googleUser==null) throw Null;
-  final GoogleSignInAuthentication? googleAuth = await googleUser.authentication;
-
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleAuth?.accessToken,
-    idToken: googleAuth?.idToken,
-  );
-
-      
-  
-  return await FirebaseAuth.instance.signInWithCredential(credential);
-
-}
-  catch (error) {
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (error) {
       throw Null;
     }
-}
+  }
+  
+
 }

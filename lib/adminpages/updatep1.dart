@@ -209,7 +209,8 @@ class _FooddetailsState extends State<Fooddetails> {
       incredients: _ingredientsEditingController.text,
       procedure: _procedureEditingController.text,
       photo: selectImages?.path??"",
-      favoritesUserIds: widget.rrecipes.favoritesUserIds
+      favoritesUserIds: widget.rrecipes.favoritesUserIds,
+     // ProfileImage:widget.rrecipes.ProfileImage,
     );
 
     int key = getKeyofupdatedrecipe(widget.rrecipes);
