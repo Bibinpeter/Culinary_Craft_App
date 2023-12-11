@@ -46,7 +46,7 @@ return UserCredentialConstant.admin;
     }
     }
 
-      Future signOut() async {
+      Future   signOut() async {
     try {
       await HelperFunctions.saveUserLoggedInStatus(false);
       await HelperFunctions.saveUserEmailSF("");

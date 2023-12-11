@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:prj1/adminpages/models/model.dart';
 import 'package:prj1/indropages/showp.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
+import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/bottomnav.dart';
 
 void main() async {

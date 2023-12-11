@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/models/model.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class ProductItemScreen extends StatefulWidget {
   const ProductItemScreen({
@@ -22,6 +23,10 @@ class _ProductItemScreenState extends State<ProductItemScreen>
     with TickerProviderStateMixin {
   late final Recipe culinary;
   final fontesh = GoogleFonts.poppins();
+   final controller = YoutubePlayerController;
+    final videoId = YoutubePlayer.convertUrlToId(
+          'https://www.youtube.com/watch?v=bYZ91kJ6Mbs') ??
+      '';
   late bool isFavorite ;
 
   late AnimationController _scaleController;
@@ -182,7 +187,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                       width: 5,
                     ),
                     Text(
-                      ": ${widget.recipe.time}",
+                      ": ${widget.recipe.time}min",
                       style: fontesh,
                     ),
                   ],
@@ -256,7 +261,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                 ),
                 Text(
                   "Description",
-                  style: fontesh,
+                  style: GoogleFonts.poppins(fontSize: 18)
                 ),
                 const SizedBox(
                   height: 10,
@@ -273,33 +278,35 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                 ),
                 Text(
                   "Ingredients",
-                  style: GoogleFonts.poppins(fontSize: 15),
+                  style: GoogleFonts.poppins(fontSize: 18), 
                 ),
                 const SizedBox(
                   height: 10,
                 ),
+                Text(widget.recipe.incredients),
                 
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) => ingredients(context),
-                ),
+                
                  const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
-                  child: Divider(
+                  child: Divider( 
                     height: 4,
                   ),
                 ),
                  Text(
                   "Procedure", 
-                  style: GoogleFonts.poppins(fontSize: 15),
+                  style: GoogleFonts.poppins(fontSize: 18),
                 ),
+                const SizedBox(height: 8,), 
                 Text(widget.recipe.procedure ),
                 const SizedBox(
                   height: 50,
                 ),
-                
+                 const Divider(
+                    height: 4,
+                  ),
+            
               ],
+              
             ),
           ),
         );
@@ -307,36 +314,6 @@ class _ProductItemScreenState extends State<ProductItemScreen>
     );
   }
 
-  Widget ingredients(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        print("Tapped on ingredient");
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Row(
-          children: [
-            Container(
-              height: 5,
-              width: 5,
-              color: Colors.black,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              child: Text(
-                widget.recipe.incredients,
-                style: fontesh.copyWith(
-                  fontSize: 15,
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+    
  
     }

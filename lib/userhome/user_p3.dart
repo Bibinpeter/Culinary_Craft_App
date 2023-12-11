@@ -135,15 +135,29 @@ class _UsesP3State extends State<UsesP3> {
     final double categoryHeight = size.height * 0.16;
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        title: Center(
-            child: Text(
-          'Category',
-          style: GoogleFonts.poppins(
-              color: const Color.fromARGB(255, 0, 0, 0), fontSize: 22),
-        )),
-        backgroundColor: const Color.fromARGB(255, 91, 215, 215),
-      ),
+            elevation: 0,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 153, 241, 238), // Replace with your desired gradient colors
+                    Color.fromARGB(255, 0, 163, 158),
+                  ],
+                ),
+              ),
+            ),
+            centerTitle: true,
+            title: Text(
+              "Categories",
+              style: GoogleFonts.poppins(
+                color: const Color.fromARGB(255, 255, 255, 255), // Text color
+                fontSize: 22,
+               
+              ),
+            ),
+          ),
       extendBody: true,
       body: Container(
         height: size.height,

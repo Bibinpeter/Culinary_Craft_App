@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:prj1/adminpages/admingridvw.dart';
 import 'package:prj1/adminpages/categoryclass.dart';
 import 'package:prj1/adminpages/hive_db.dart';
-import 'package:prj1/adminpages/models/category.dart';
+import 'package:prj1/models/category.dart';
 import 'package:prj1/models/model.dart';
  
 class Fooddetails extends StatefulWidget {
@@ -141,6 +141,7 @@ class _FooddetailsState extends State<Fooddetails> {
                 height: 15,
               ),
               TextFormField(
+                maxLines: null,
                 controller: _ingredientsEditingController,
                 decoration: InputDecoration(
                   labelText: 'ingredients',
@@ -161,6 +162,7 @@ class _FooddetailsState extends State<Fooddetails> {
                 height: 15,
               ),
               TextFormField(
+                maxLines: null,
                 controller: _procedureEditingController,
                 decoration: InputDecoration(
                   labelText: 'procedure',

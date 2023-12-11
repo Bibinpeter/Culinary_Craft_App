@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +7,11 @@ import 'package:icons_plus/icons_plus.dart';
 import 'package:prj1/adminpages/admingridvw.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
 import 'package:prj1/indropages/widgets/widgets.dart';
+import 'package:prj1/register.dart';
 import 'package:prj1/reset_passwrd.dart';
 import 'package:prj1/services/auth_service.dart';
 import 'package:prj1/services/database_services.dart';
-import 'package:prj1/userhome/Loginstream/register.dart';
+
 
 class Login extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -185,7 +187,7 @@ class _LoginState extends State<Login> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: ((context) =>
-                                                      const Register())));
+                                                      Register())));
                                         },
                                         
                                           child: Text(

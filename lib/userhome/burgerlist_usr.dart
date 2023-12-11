@@ -1,8 +1,10 @@
+
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
-import 'package:prj1/adminpages/models/model.dart';
+import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/constrains_usrp1.dart';
 import 'package:prj1/userhome/product_details.dart';
 
@@ -25,6 +27,7 @@ class _BurgerListState extends State<BurgerList> {
     super.initState();
     _scrollController = ScrollController();
     post = FOOD_DATA.firstWhere((element) => element['name'] == widget.selectedCategory);
+
   }
 
   @override
@@ -66,7 +69,7 @@ class _BurgerListState extends State<BurgerList> {
                     title: Padding(
                       padding: const EdgeInsets.only(right: 40),
                       child: Text(
-                        "${"Your " + post["name"]}List",
+                        "${"Your " + post["name"]} List",
                         style: GoogleFonts.poppins(
                           fontSize: 22,
                           color: const Color.fromARGB(255, 255, 255, 255),
@@ -127,30 +130,24 @@ class _BurgerListState extends State<BurgerList> {
                               children: [
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(13),
-                                  child: ColorFiltered(
-                                    colorFilter: ColorFilter.mode(
-                                      const Color.fromARGB(255, 0, 0, 0).withOpacity(0.2),
-                                      BlendMode.multiply,
-                                    ),
-                                    child: ShaderMask(
-                                      shaderCallback: (Rect bounds) {
-                                        return LinearGradient(
-                                          begin: Alignment.bottomCenter,
-                                          end: Alignment.topCenter,
-                                          colors: [
-                                            Colors.black.withOpacity(0.9),
-                                            Colors.black,
-                                          ],
-                                        ).createShader(bounds);
-                                      },
-                                      blendMode: BlendMode.dstIn,
-                                      child: FadeInImage(
-                                        placeholder: const AssetImage('assets/images/foodplaceholder.png'), // Replace with your placeholder image
-                                        image: FileImage(File(imageUrl)),
-                                        fit: BoxFit.cover,
-                                        height: 200,
-                                        width: double.infinity,
-                                      ),
+                                  child: ShaderMask(
+                                    shaderCallback: (Rect bounds) {
+                                      return LinearGradient(
+                                        begin: Alignment.bottomCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.black.withOpacity(0.4),
+                                          Colors.black.withOpacity(0.6),
+                                        ],
+                                      ).createShader(bounds);
+                                    },
+                                    blendMode: BlendMode.dstIn,
+                                    child: FadeInImage(
+                                      placeholder: const AssetImage('assets/images/foodplaceholder.png'),
+                                      image: FileImage(File(imageUrl)),
+                                      fit: BoxFit.cover,
+                                      height: 200,
+                                      width: double.infinity,
                                     ),
                                   ),
                                 ),
@@ -167,9 +164,9 @@ class _BurgerListState extends State<BurgerList> {
                                         width: 5,
                                       ),
                                       Text(
-                                        category.time,
-                                        style: GoogleFonts.poppins(color: Colors.white),
-                                      )
+                                        "${category.time}min",
+                                        style: GoogleFonts.poppins(color: Color.fromARGB(255, 255, 255, 255)),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -199,6 +196,7 @@ class _BurgerListState extends State<BurgerList> {
       ),
     );
   }
+
 
   PageRouteBuilder _createPageRoute(category) {
     return PageRouteBuilder(

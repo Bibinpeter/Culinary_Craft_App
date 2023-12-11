@@ -7,6 +7,7 @@ import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/burgerlist_usr.dart';
 import 'package:prj1/userhome/constrains_usrp1.dart';
 import 'package:prj1/userhome/fav_page.dart';
+import 'package:prj1/userhome/latest.dart';
 
 class UserPage1 extends StatefulWidget {
   const UserPage1({super.key});
@@ -18,7 +19,7 @@ class UserPage1 extends StatefulWidget {
 class _UserPage1State extends State<UserPage1> {
   List<Recipe> recipelist = [];
   List<Widget> itemsData = [];
-  final CategoriesScroller categoriesScroller = const CategoriesScroller();
+  final CategoriesScroller categoriesScroller =  CategoriesScroller(recipelist: [],);
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
   double topContainer = 0;
@@ -33,8 +34,9 @@ class _UserPage1State extends State<UserPage1> {
         onTap: () {
           fetchRecipesByCategory(categoryofFood: post['name']);
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  BurgerList(selectedCategory: post['name'],)));
+              builder: (context) => BurgerList(
+                    selectedCategory: post['name'],
+                  )));
         },
         child: Container(
             height: 150,
@@ -82,17 +84,16 @@ class _UserPage1State extends State<UserPage1> {
                     ],
                   ),
                   FadeInImage(
-  placeholder: const AssetImage('assets/images/forkplaceholder.png'), // Replace with your placeholder image
-  image: AssetImage("assets/images/${post["image"]}"),
-  fit: BoxFit.cover,
-  height: double.infinity,
-),
-
+                    placeholder: const AssetImage(
+                        'assets/images/forkplaceholder.png'), // Replace with your placeholder image
+                    image: AssetImage("assets/images/${post["image"]}"),
+                    fit: BoxFit.cover,
+                    height: double.infinity,
+                  ),
                 ],
               ),
             )),
       ));
-       
     }
     setState(() {
       itemsData = listItems;
@@ -109,7 +110,7 @@ class _UserPage1State extends State<UserPage1> {
 
       setState(() {
         topContainer = value;
-        closeTopContainer = controller.offset > 90 ;
+        closeTopContainer = controller.offset > 90;
       });
     });
   }
@@ -128,32 +129,31 @@ class _UserPage1State extends State<UserPage1> {
     ////////////scaffold//////////////////
     return Scaffold(
       appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60.0),
-          child: AppBar(
-            elevation: 0,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color.fromARGB(255, 153, 241, 238), // Replace with your desired gradient colors
-                    Color.fromARGB(255, 0, 163, 158),
-                  ],
-                ),
-              ),
-            ),
-            centerTitle: true,
-            title: Text(
-              "Home",
-              style: GoogleFonts.poppins(
-                color: const Color.fromARGB(255, 255, 255, 255), // Text color
-                fontSize: 22,
-               
+        preferredSize: const Size.fromHeight(60.0),
+        child: AppBar(
+          elevation: 0,
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color.fromARGB(255, 107, 255, 250), // Replace with your desired gradient colors
+                  Color.fromARGB(255, 48, 185, 181),
+                ],
               ),
             ),
           ),
+          centerTitle: true,
+          title: Text(
+            "Home",
+            style: GoogleFonts.poppins(
+              color: const Color.fromARGB(255, 255, 255, 255), // Text color
+              fontSize: 22,
+            ),
+          ),
         ),
+      ),
       extendBody: true,
       // backgroundColor: const Color.fromARGB(255, 0, 0, 0),
 
@@ -184,7 +184,7 @@ class _UserPage1State extends State<UserPage1> {
               child: Text(
                 "Recipes for You",
                 style: GoogleFonts.poppins(
-                    color: Color.fromARGB(255, 134, 132, 132), fontSize: 18),
+                    color: const Color.fromARGB(255, 134, 132, 132), fontSize: 18),
               ),
             ),
             const SizedBox(
@@ -212,8 +212,8 @@ class _UserPage1State extends State<UserPage1> {
                       children: [
                         FadeInImage(
                           fadeInCurve: Curves.bounceInOut,
-                          placeholder:
-                              const AssetImage('assets/images/foodplaceholder.png'),
+                          placeholder: const AssetImage(
+                              'assets/images/foodplaceholder.png'),
                           image: FileImage(File(recipelist[i].photo)),
                           fit: BoxFit.fitWidth,
                           width: 370,
@@ -258,7 +258,7 @@ class _UserPage1State extends State<UserPage1> {
               child: Text(
                 "Loyality cards",
                 style: GoogleFonts.poppins(
-                    fontSize: 18, color: Color.fromARGB(255, 70, 69, 69)),
+                    fontSize: 18, color: const Color.fromARGB(255, 70, 69, 69)),
               ),
             ),
             AnimatedOpacity(
@@ -269,7 +269,7 @@ class _UserPage1State extends State<UserPage1> {
                   width: size.width,
                   alignment: Alignment.topCenter,
                   height: closeTopContainer ? 0 : categoryHeight,
-                  child: categoriesScroller),
+                  child: CategoriesScroller(recipelist: recipelist)),
             ),
             Expanded(
                 child: ListView.builder(
@@ -308,8 +308,8 @@ class _UserPage1State extends State<UserPage1> {
 
 class CategoriesScroller extends StatelessWidget {
   /////////////////////////////////////////////////containers//////////////////////////////
-  const CategoriesScroller({super.key});
-
+  const CategoriesScroller({super.key, required this.recipelist});
+final List<Recipe> recipelist;
   @override
   Widget build(BuildContext context) {
     final double categoryHeight =
@@ -318,19 +318,126 @@ class CategoriesScroller extends StatelessWidget {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Container(
-            margin:  const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: FittedBox(
               fit: BoxFit.fill,
               alignment: Alignment.topCenter,
               child: Row(children: <Widget>[
                 InkWell(
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(builder:(context) =>FavoritesPage(),)),
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const FavoritesPage(),
+                  )),
                   child: Container(
+                    width: 150,
+                    margin: const EdgeInsets.only(right: 20),
+                    height: categoryHeight,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Stack(
+                        children: <Widget>[
+                          const FadeInImage(
+                            placeholder: AssetImage(
+                                "assets/images/foodplaceholder.png"), // Replaced with my placeholder image.
+                            image: AssetImage(
+                                "assets/images/Imaginary World Through My Iphone.jpeg"),
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 0,
+                                  ),
+                                  child: Text(
+                                    "Favorites",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                const Icon(
+                                  Icons.favorite,
+                                  color: Color.fromARGB(255, 208, 20, 7),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {List<Recipe> listset=[];
+                    ;for (var v = 0;v< recipelist.length-3;  v++) {
+                      listset.add(recipelist[v]);
+                    }
+                    
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: ((context) =>
+                            Latest(recipelist: listset.toList()))));
+                  },
+                  child: Container(
+                    width: 150,
+                    margin: const EdgeInsets.only(right: 20),
+                    height: categoryHeight,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Stack(
+                        children: <Widget>[
+                          const FadeInImage(
+                            placeholder: AssetImage(
+                                "assets/images/foodplaceholder.png"), // Replace with your placeholder image
+                            image: AssetImage("assets/images/Advertising.jpeg"),
+                            width: double.infinity,
+                            height: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                    right: 30,
+                                  ),
+                                  child: Text(
+                                    "Latest",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
                   width: 150,
                   margin: const EdgeInsets.only(right: 20),
                   height: categoryHeight,
                   decoration: const BoxDecoration(
-                    
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   ),
                   child: ClipRRect(
@@ -338,66 +445,16 @@ class CategoriesScroller extends StatelessWidget {
                     child: Stack(
                       children: <Widget>[
                         const FadeInImage(
-                          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replaced with my placeholder image.
-                          image: AssetImage("assets/images/Imaginary World Through My Iphone.jpeg"),
+                          placeholder: AssetImage(
+                              "assets/images/foodplaceholder.png"), // Replace with your placeholder image
+                          image: AssetImage(
+                              "assets/images/Alex Lau Food — 2D Creative Artists.jpeg"),
                           width: double.infinity,
                           height: double.infinity,
                           fit: BoxFit.cover,
                         ),
                         Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                  padding: const EdgeInsets.only(
-                    right: 0,
-                  ),
-                  child: Text(
-                    "Favorites",
-                    style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                  ),
-                              ),
-                              const SizedBox(
-                  width: 10,
-                              ),
-                              const Icon(
-                  Icons.favorite,
-                  color: Color.fromARGB(255, 208, 20, 7),
-                              )
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                ),
-
-                Container(
-                  width: 150,
-                  margin: const EdgeInsets.only(right: 20),
-                  height: categoryHeight,
-                  decoration: const BoxDecoration(
-                    
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Stack(
-                      children: <Widget>[
-                        const FadeInImage(
-          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
-          image: AssetImage("assets/images/Advertising.jpeg"),
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
@@ -405,55 +462,13 @@ class CategoriesScroller extends StatelessWidget {
                                 padding: const EdgeInsets.only(
                                   right: 30,
                                 ),
-                                child: Text(
-                                  "Latest",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 150,
-                  margin: const EdgeInsets.only(right: 20),
-                  height: categoryHeight,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Stack(
-                      children: <Widget>[
-                       const FadeInImage(
-          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
-          image: AssetImage("assets/images/Alex Lau Food — 2D Creative Artists.jpeg"),
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 30,
-                                ),
-                                child: Text(
-                                  "Super\nSaved",
+                                child: Text( 
+                                  " Easiest\n",
                                   style: GoogleFonts.poppins(
                                     fontSize: 20,
                                     color: Colors.white,
                                     fontWeight: FontWeight
-                                        .w500, // Use `weight` instead of `fontWeight`
+                                        .w500,  
                                   ),
                                 ),
                               ),

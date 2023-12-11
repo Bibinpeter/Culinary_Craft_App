@@ -92,9 +92,9 @@ class _UsesP2State extends State<UsesP2> {
               ),
             ),
             if (filteredRecipes.isEmpty)
-              const Padding(
-                padding: EdgeInsets.all(98.0),
-                child: Text("Food data is not available!!.."),
+              Padding(
+                padding: const EdgeInsets.all(98.0),
+                child: Image.asset("assets/images/Animation - 1698299418630.gif"), 
               )
             else
               Expanded(

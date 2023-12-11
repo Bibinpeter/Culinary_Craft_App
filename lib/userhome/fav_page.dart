@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
 
 class FavoritesPage extends StatefulWidget {
@@ -19,11 +22,29 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        elevation: 0,
-      ),
+            elevation: 0,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color.fromARGB(255, 153, 241, 238), // Replace with your desired gradient colors
+                    Color.fromARGB(255, 0, 163, 158),
+                  ],
+                ),
+              ),
+            ),
+            centerTitle: true,
+            title: Text(
+              "Your Favorites",
+              style: GoogleFonts.poppins(
+                color: const Color.fromARGB(255, 255, 255, 255), // Text color
+                fontSize: 22,
+               
+              ),
+            ),
+          ),
       body: ValueListenableBuilder(
         valueListenable: favoriteNotifier,
         builder: (context, value, _) {
@@ -45,34 +66,57 @@ class _FavoritesPageState extends State<FavoritesPage> {
                       style: TextStyle(fontSize: 18),
                     ),
                   )
-                : ListView.builder(
+                : GridView.builder(
                     physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.horizontal,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, 
+                      crossAxisSpacing: 8.0,
+                      mainAxisSpacing: 8.0,
+                    ),
                     itemCount: value.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.all(8),
                         child: Container(
-                          width: 150, // Adjust the width as needed
+                          width: 120,
+                          height: 100,
                           decoration: BoxDecoration(
                             color: Colors.teal,
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                value[index].title,
-                                style: const TextStyle(fontSize: 16, color: Colors.white),
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.delete),
-                                onPressed: () {
-                                  // Handle delete action
-                                },
-                                color: Colors.white,
-                              ),
-                            ],
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                Image(
+                                  image: FileImage(File(value[index].photo)),
+                                  fit: BoxFit.cover,
+                                ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromARGB(0, 0, 0, 0),
+                                        Color.fromARGB(255, 0, 0, 0).withOpacity(0.5),
+                                      ],
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.bottomCenter,
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      value[index].title,
+                                      style: GoogleFonts.poppins(color: Colors.white)
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
