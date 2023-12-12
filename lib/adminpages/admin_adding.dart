@@ -24,7 +24,6 @@ class _AdminLoginState extends State<Admin> {
 
   File? selectImage;
 
-File? _image;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

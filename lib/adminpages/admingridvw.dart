@@ -12,9 +12,7 @@ class AdminHome extends StatefulWidget {
   @override
   State<AdminHome> createState() => _AdminHomeState();
 }
-
-// List<Recipe> foodlists = [];
-
+ 
 class _AdminHomeState extends State<AdminHome> {
   Future<void> getfooddetails() async {
     List<Recipe> foodlist = await getRecipes();

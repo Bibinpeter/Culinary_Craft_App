@@ -19,7 +19,9 @@ class UserPage1 extends StatefulWidget {
 class _UserPage1State extends State<UserPage1> {
   List<Recipe> recipelist = [];
   List<Widget> itemsData = [];
-  final CategoriesScroller categoriesScroller =  CategoriesScroller(recipelist: [],);
+  final CategoriesScroller categoriesScroller = CategoriesScroller(
+    recipelist: [],
+  );
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
   double topContainer = 0;
@@ -138,7 +140,8 @@ class _UserPage1State extends State<UserPage1> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color.fromARGB(255, 107, 255, 250), // Replace with your desired gradient colors
+                  Color.fromARGB(255, 107, 255,
+                      250), // Replace with your desired gradient colors
                   Color.fromARGB(255, 48, 185, 181),
                 ],
               ),
@@ -184,7 +187,8 @@ class _UserPage1State extends State<UserPage1> {
               child: Text(
                 "Recipes for You",
                 style: GoogleFonts.poppins(
-                    color: const Color.fromARGB(255, 134, 132, 132), fontSize: 18),
+                    color: const Color.fromARGB(255, 134, 132, 132),
+                    fontSize: 18),
               ),
             ),
             const SizedBox(
@@ -309,7 +313,7 @@ class _UserPage1State extends State<UserPage1> {
 class CategoriesScroller extends StatelessWidget {
   /////////////////////////////////////////////////containers//////////////////////////////
   const CategoriesScroller({super.key, required this.recipelist});
-final List<Recipe> recipelist;
+  final List<Recipe> recipelist;
   @override
   Widget build(BuildContext context) {
     final double categoryHeight =
@@ -328,7 +332,7 @@ final List<Recipe> recipelist;
                     builder: (context) => const FavoritesPage(),
                   )),
                   child: Container(
-                    width: 150,
+                    width: 160,
                     margin: const EdgeInsets.only(right: 20),
                     height: categoryHeight,
                     decoration: const BoxDecoration(
@@ -380,17 +384,18 @@ final List<Recipe> recipelist;
                   ),
                 ),
                 InkWell(
-                  onTap: () { List<Recipe> listset=[];
-                    for (var v = 0;v< recipelist.length-3;  v++) {
+                  onTap: () {
+                    List<Recipe> listset = [];
+                    for (var v = 0; v < recipelist.length - 3; v++) {
                       listset.add(recipelist[v]);
                     }
-                    
+
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: ((context) =>
                             Latest(recipelist: listset.toList()))));
                   },
                   child: Container(
-                    width: 150,
+                    width: 160,
                     margin: const EdgeInsets.only(right: 20),
                     height: categoryHeight,
                     decoration: const BoxDecoration(
@@ -434,7 +439,7 @@ final List<Recipe> recipelist;
                   ),
                 ),
                 Container(
-                  width: 150,
+                  width: 120,
                   margin: const EdgeInsets.only(right: 20),
                   height: categoryHeight,
                   decoration: const BoxDecoration(
@@ -462,13 +467,12 @@ final List<Recipe> recipelist;
                                 padding: const EdgeInsets.only(
                                   right: 30,
                                 ),
-                                child: Text( 
+                                child: Text(
                                   " Easiest\n",
                                   style: GoogleFonts.poppins(
                                     fontSize: 20,
                                     color: Colors.white,
-                                    fontWeight: FontWeight
-                                        .w500,  
+                                    fontWeight: FontWeight.w500,
                                   ),
                                 ),
                               ),

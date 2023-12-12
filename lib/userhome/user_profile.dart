@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,12 +7,11 @@ import 'package:prj1/services/auth_service.dart';
 import 'package:prj1/services/database_services.dart';
 import 'package:prj1/userhome/Login.dart';
 import 'dart:io';
-
-import 'package:prj1/userhome/profile_update.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 class userP4 extends StatefulWidget {
   final String? userId;
-  const userP4({Key? key, this.userId}) : super(key: key);
+final String? nameofuser;
+   userP4({Key? key, this.userId,this.nameofuser, }) : super(key: key);
 
   @override
   State<userP4> createState() => _userP4State();
@@ -23,7 +21,7 @@ AuthService authService = AuthService();
 Stream<DocumentSnapshot>? userDatastream;
 
 class _userP4State extends State<userP4> {
-  File? _image;
+  
   String? emailofuser;
   String? nameofuser;
   // String? userId = FirebaseAuth.instance.currentUser!.uid;
@@ -32,6 +30,7 @@ String? userProfile;
   @override
   void initState() {
     super.initState();
+    
     getUserEmailFromSF();
     getUserNameFromSF();
     // userId=
@@ -133,46 +132,35 @@ await DatabaseService().userCollection.doc(widget.userId).update({"profile": ima
                         shape: BoxShape.circle,
                         color: const Color.fromARGB(255, 255, 255, 255),
                       ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ProfileUpdatePage(imageFile: _image)),
-                          );
-                        },
-                        child: StreamBuilder(
-                          stream: userDatastream,
-                          builder: (context, snapshot) {
-                            if(snapshot.connectionState == ConnectionState.waiting) {
-                              return Center(child: CircularProgressIndicator(),);
-                            }
-                            if(!snapshot.hasData){
-                               print('no stream');
-                                    return CircleAvatar(
-                              // backgroundImage:
-                              //     userProfile != '' ? NetworkImage(userProfile??"") : null,
-                              backgroundColor: Colors.black,
-                              radius: 20,
-                            ); 
-                            }
-                            if(snapshot.hasData){
-                              final userDataSnapshot=snapshot.data!.data()as Map<String,dynamic>;
-
-                              userProfile= userDataSnapshot['profile'];
-
-                              debugPrint('url on profile: $userProfile');
-
-                           return  CircleAvatar(
-                              backgroundImage:
-                                  userProfile == "" ?  Image.asset('assets/images/Alex Lau Food — 2D Creative Artists.jpeg').image : Image.network(userProfile??"").image,
-                              radius: 20,
-                            ); 
-                            }
-                        return SizedBox();
+                      child: StreamBuilder(
+                        stream: userDatastream,
+                        builder: (context, snapshot) {
+                          if(snapshot.connectionState == ConnectionState.waiting) {
+                            return Center(child: Image.asset('assets/images/user4.png'),);
                           }
-                        ),
+                          if(!snapshot.hasData){
+                             print('no stream');
+                                  return const CircleAvatar(
+                           
+                            backgroundColor: Colors.black,
+                            radius: 20,
+                          ); 
+                          }
+                          if(snapshot.hasData){
+                            final userDataSnapshot=snapshot.data!.data()as Map<String,dynamic>;
+
+                            userProfile= userDataSnapshot['profile'];
+
+                            debugPrint('url on profile: $userProfile');
+
+                         return  CircleAvatar(
+                            backgroundImage:
+                                userProfile == "" ?  Image.asset('assets/images/user4.png').image : Image.network(userProfile??"").image,
+                            radius: 20,
+                          ); 
+                          }
+                      return const SizedBox();
+                        }
                       ),
                     ),
                     Padding(

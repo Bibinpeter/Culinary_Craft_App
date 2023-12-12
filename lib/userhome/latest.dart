@@ -1,13 +1,16 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/models/model.dart';
+import 'package:prj1/userhome/fav_page.dart';
 import 'package:prj1/userhome/product_details.dart';
 
+// ignore: must_be_immutable
 class Latest extends StatefulWidget {
   Latest({Key? key, required this.recipelist}) : super(key: key);
   final List<Recipe> recipelist;
-
+ String? userProfile;
   @override
   State<Latest> createState() => _LatestState();
 }
@@ -58,7 +61,7 @@ class _LatestState extends State<Latest> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => ProductItemScreen(
-                          recipe: widget.recipelist[index],
+                          recipe: widget.recipelist[index],userProfile: userProfile,userId: FirebaseAuth.instance.currentUser!.uid,
                         ),
                       ),
                     );

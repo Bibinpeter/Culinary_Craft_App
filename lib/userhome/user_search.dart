@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -17,7 +18,7 @@ class _UsesP2State extends State<UsesP2> {
   final TextEditingController _searchController = TextEditingController();
   List<Recipe> allRecipes = [];
   List<Recipe> filteredRecipes = [];
-
+String? userProfile;
   Future<void> fetchRecipes() async {
     allRecipes = await getRecipes();
     updateFilteredRecipes();
@@ -140,7 +141,7 @@ class _UsesP2State extends State<UsesP2> {
                                               builder: (context) =>
                                                   ProductItemScreen(
                                                       recipe: recipesInCategory[
-                                                          index])),
+                                                          index],userId: FirebaseAuth.instance.currentUser!.uid,userProfile: userProfile,)),
                                         );
                                       },
                                       child: Stack(

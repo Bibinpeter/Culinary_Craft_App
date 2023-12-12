@@ -112,6 +112,7 @@ class _FooddetailsState extends State<Fooddetails> {
                 height: 15,
               ),
               TextFormField(
+                maxLines: null, 
                 controller: descriEditingController,
                 decoration: InputDecoration(
                   labelText: 'description',

@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
@@ -21,7 +22,7 @@ class _BurgerListState extends State<BurgerList> {
   late ScrollController _scrollController;
   late Map<String, dynamic> post;
   List<Recipe> allRecipes = [];
-
+   String? userProfile;
   @override
   void initState() {
     super.initState();
@@ -201,7 +202,7 @@ class _BurgerListState extends State<BurgerList> {
   PageRouteBuilder _createPageRoute(category) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) {
-        return ProductItemScreen(recipe: category);
+        return ProductItemScreen(recipe: category,userProfile: userProfile,userId: FirebaseAuth.instance.currentUser!.uid,);
       },
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0);
