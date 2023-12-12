@@ -140,6 +140,7 @@ class _AdminLoginState extends State<Admin> {
                         height: 15,
                       ),
                       TextFormField(
+                        maxLines: null,
                         controller: _decorEditingController,
                         decoration: InputDecoration(
                           labelText: 'descrption',

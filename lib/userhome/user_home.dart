@@ -439,7 +439,7 @@ class CategoriesScroller extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  width: 120,
+                  width: 150, 
                   margin: const EdgeInsets.only(right: 20),
                   height: categoryHeight,
                   decoration: const BoxDecoration(

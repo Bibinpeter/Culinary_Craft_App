@@ -8,10 +8,17 @@ import 'package:prj1/services/database_services.dart';
 import 'package:prj1/userhome/Login.dart';
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:prj1/userhome/about_page.dart';
+import 'package:prj1/userhome/termsandpri_page.dart';
+
 class userP4 extends StatefulWidget {
   final String? userId;
-final String? nameofuser;
-   userP4({Key? key, this.userId,this.nameofuser, }) : super(key: key);
+  final String? nameofuser;
+  userP4({
+    Key? key,
+    this.userId,
+    this.nameofuser,
+  }) : super(key: key);
 
   @override
   State<userP4> createState() => _userP4State();
@@ -21,20 +28,19 @@ AuthService authService = AuthService();
 Stream<DocumentSnapshot>? userDatastream;
 
 class _userP4State extends State<userP4> {
-  
   String? emailofuser;
   String? nameofuser;
   // String? userId = FirebaseAuth.instance.currentUser!.uid;
-String? imageUrl;
-String? userProfile;
+  String? imageUrl;
+  String? userProfile;
   @override
   void initState() {
     super.initState();
-    
+
     getUserEmailFromSF();
     getUserNameFromSF();
     // userId=
-    userDatastream=DatabaseService().getuserdetails(widget.userId??"");
+    userDatastream = DatabaseService().getuserdetails(widget.userId ?? "");
     debugPrint('id on profile: ${widget.userId}');
   }
 
@@ -42,15 +48,20 @@ String? userProfile;
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
-   try {if (pickedFile != null) {
-      Reference referenceImageToUpLoad=FirebaseStorage.instance.ref().child(widget.userId ??"");
-    await referenceImageToUpLoad.putFile(File(pickedFile.path));
-     imageUrl=await referenceImageToUpLoad.getDownloadURL();
-    }} catch (e) {
+    try {
+      if (pickedFile != null) {
+        Reference referenceImageToUpLoad =
+            FirebaseStorage.instance.ref().child(widget.userId ?? "");
+        await referenceImageToUpLoad.putFile(File(pickedFile.path));
+        imageUrl = await referenceImageToUpLoad.getDownloadURL();
+      }
+    } catch (e) {
       debugPrint(e.toString());
     }
-await DatabaseService().userCollection.doc(widget.userId).update({"profile": imageUrl});
-
+    await DatabaseService()
+        .userCollection
+        .doc(widget.userId)
+        .update({"profile": imageUrl});
   }
 
   @override
@@ -82,7 +93,7 @@ await DatabaseService().userCollection.doc(widget.userId).update({"profile": ima
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(bottom:5),
+                          padding: const EdgeInsets.only(bottom: 5),
                           child: FloatingActionButton(
                             elevation: 9,
                             backgroundColor:
@@ -98,13 +109,17 @@ await DatabaseService().userCollection.doc(widget.userId).update({"profile": ima
                             child: const Icon(Icons.logout),
                           ),
                         ),
-                         
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 70 ),
-                      child: Text('Logout',style: GoogleFonts.poppins(color: Colors.white,),),
-                    ) 
+                      padding: const EdgeInsets.only(bottom: 70),
+                      child: Text(
+                        'Logout',
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -133,35 +148,39 @@ await DatabaseService().userCollection.doc(widget.userId).update({"profile": ima
                         color: const Color.fromARGB(255, 255, 255, 255),
                       ),
                       child: StreamBuilder(
-                        stream: userDatastream,
-                        builder: (context, snapshot) {
-                          if(snapshot.connectionState == ConnectionState.waiting) {
-                            return Center(child: Image.asset('assets/images/user4.png'),);
-                          }
-                          if(!snapshot.hasData){
-                             print('no stream');
-                                  return const CircleAvatar(
-                           
-                            backgroundColor: Colors.black,
-                            radius: 20,
-                          ); 
-                          }
-                          if(snapshot.hasData){
-                            final userDataSnapshot=snapshot.data!.data()as Map<String,dynamic>;
+                          stream: userDatastream,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: Image.asset('assets/images/user4.png'),
+                              );
+                            }
+                            if (!snapshot.hasData) {
+                              print('no stream');
+                              return const CircleAvatar(
+                                backgroundColor: Colors.black,
+                                radius: 20,
+                              );
+                            }
+                            if (snapshot.hasData) {
+                              final userDataSnapshot =
+                                  snapshot.data!.data() as Map<String, dynamic>;
 
-                            userProfile= userDataSnapshot['profile'];
+                              userProfile = userDataSnapshot['profile'];
 
-                            debugPrint('url on profile: $userProfile');
+                              debugPrint('url on profile: $userProfile');
 
-                         return  CircleAvatar(
-                            backgroundImage:
-                                userProfile == "" ?  Image.asset('assets/images/user4.png').image : Image.network(userProfile??"").image,
-                            radius: 20,
-                          ); 
-                          }
-                      return const SizedBox();
-                        }
-                      ),
+                              return CircleAvatar(
+                                backgroundImage: userProfile == ""
+                                    ? Image.asset('assets/images/user4.png')
+                                        .image
+                                    : Image.network(userProfile ?? "").image,
+                                radius: 20,
+                              );
+                            }
+                            return const SizedBox();
+                          }),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -183,22 +202,32 @@ await DatabaseService().userCollection.doc(widget.userId).update({"profile": ima
                   label: 'Username',
                   value: nameofuser ??
                       '', // Use the loaded username or an empty string as a default
-                  icon: Icons.abc,
                 ),
                 ProfileDetailCard(
                   label: 'Email id',
                   value: emailofuser ?? '',
-                  icon: Icons.abc,
                 ),
-                ProfileDetailCard(
-                  label: 'Terms and privacy',
-                  value: 'FirebaseAuth.instance.currentUser.email',
-                  icon: Icons.abc,
+               InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => TermsandPrivacy()),
+                    );
+                  },
+                  child: ProfileDetailCard(
+                    label: 'Terms and privacy',
+                    value: '',
+                  ),
                 ),
-                ProfileDetailCard(
-                  label: 'About',
-                  value: 'Passionate Flutterkj vdfvdfvdfvdfvdfv',
-                  icon: Icons.abc,
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const About()),
+                    );
+                  },
+                  child: ProfileDetailCard(
+                    label: 'About us',
+                    value: ' ',
+                  ),
                 ),
               ],
             ),
@@ -231,12 +260,11 @@ await DatabaseService().userCollection.doc(widget.userId).update({"profile": ima
 
 // ignore: must_be_immutable
 class ProfileDetailCard extends StatelessWidget {
-  final String label;
+   String label;
   String value;
-  final IconData icon;
+
   ProfileDetailCard({
     Key? key,
-    required this.icon,
     required this.label,
     required this.value,
   }) : super(key: key);

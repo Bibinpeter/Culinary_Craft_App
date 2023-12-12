@@ -62,6 +62,7 @@ class _LatestState extends State<Latest> {
                       MaterialPageRoute(
                         builder: (context) => ProductItemScreen(
                           recipe: widget.recipelist[index],userProfile: userProfile,userId: FirebaseAuth.instance.currentUser!.uid,
+                          
                         ),
                       ),
                     );

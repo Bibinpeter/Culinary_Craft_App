@@ -19,7 +19,7 @@ class _UsesP3State extends State<UsesP3> {
   bool closeTopContainer = false;
   double topContainer = 0;
 
-  void getPostsData() {
+  void getPostsData() { 
     List<dynamic> responseList1 = COUNTRY_LIST;
     List<Widget> listItems = [];
     for (var post1 in responseList1) {
@@ -81,7 +81,7 @@ class _UsesP3State extends State<UsesP3> {
                     ],
                   ),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular( 15.0),
                     child: FadeInImage(
                       placeholder: const AssetImage(
                           'assets/images/placeholder.png'), // Replace with your local placeholder image path

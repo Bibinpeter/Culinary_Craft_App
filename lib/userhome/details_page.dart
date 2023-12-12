@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/adminpages/hive_db.dart';
+import 'package:prj1/userhome/fav_page.dart';
+import 'package:prj1/userhome/product_details.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key});
@@ -102,7 +105,8 @@ class _DetailsState extends State<Details> {
 
                       return InkWell(
                         onTap: () {
-                          // Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>,))
+                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
+                         ProductItemScreen(recipe: category, userProfile: userProfile, userId: FirebaseAuth.instance.currentUser!.uid),)); 
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -145,7 +149,7 @@ class _DetailsState extends State<Details> {
                                       Text(
                                         category.time,
                                         style: GoogleFonts.poppins(
-                                            color: Colors.white),
+                                            color: Color.fromARGB(255, 255, 255, 255)),
                                       )
                                     ],
                                   ),
