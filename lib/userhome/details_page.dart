@@ -149,7 +149,7 @@ class _DetailsState extends State<Details> {
                                       Text(
                                         category.time,
                                         style: GoogleFonts.poppins(
-                                            color: Color.fromARGB(255, 255, 255, 255)),
+                                            color: const Color.fromARGB(255, 255, 255, 255)),
                                       )
                                     ],
                                   ),

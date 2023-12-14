@@ -208,7 +208,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                         );
                       }
                       if (!snapshot.hasData) {
-                        print('no stream');
+                        
                        
                       }
                       if (snapshot.hasData) {
@@ -285,7 +285,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                           ],
                         );
                       }
-                      return SizedBox();
+                      return const SizedBox();
                     }),
                 const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),

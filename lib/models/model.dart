@@ -6,7 +6,7 @@ part 'model.g.dart';
 class Recipe extends HiveObject {
   @HiveField(0)
   final String title;
-
+     
   @HiveField(1)
   final String description;
 
@@ -28,11 +28,10 @@ class Recipe extends HiveObject {
    @HiveField(7)
   List<String> favoritesUserIds;
 
-// @HiveField(8)
-//   final String ProfileImage;
+ 
 
   // ignore: prefer_typing_uninitialized_variables
-  var categoryy;  
+  
 
 // Constructor
   Recipe({
@@ -44,7 +43,7 @@ class Recipe extends HiveObject {
  required this.incredients, 
  required this.time,
   required  this.favoritesUserIds,
- // required this.ProfileImage,
+  
  }
 );
 }

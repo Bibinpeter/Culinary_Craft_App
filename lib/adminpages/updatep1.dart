@@ -9,6 +9,7 @@ import 'package:prj1/models/category.dart';
 import 'package:prj1/models/model.dart';
  
 class Fooddetails extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   Fooddetails({super.key, required this.rrecipes});
   final Recipe rrecipes;
   @override
@@ -30,11 +31,9 @@ class _FooddetailsState extends State<Fooddetails> {
   @override
   void initState() {
     super.initState();
-    titleEditingController1 =
-        TextEditingController(text: widget.rrecipes.title);
+    titleEditingController1 =TextEditingController(text: widget.rrecipes.title);
     timeEditingController = TextEditingController(text: widget.rrecipes.time);
-    descriEditingController =
-        TextEditingController(text: widget.rrecipes.description);
+    descriEditingController =TextEditingController(text: widget.rrecipes.description);
     cateEditingController =
         TextEditingController(text: widget.rrecipes.category);
     _ingredientsEditingController =
@@ -228,7 +227,6 @@ class _FooddetailsState extends State<Fooddetails> {
     var key = box.keyAt(index);
     return key;
   } else {
-    print('Recipe not found in the list: ${variableReceipes.title}');
     // Handle the not-found scenario
     throw Exception('Recipe not found in the list: ${variableReceipes.title}');
   }

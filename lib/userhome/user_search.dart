@@ -19,10 +19,13 @@ class _UsesP2State extends State<UsesP2> {
   List<Recipe> allRecipes = [];
   List<Recipe> filteredRecipes = [];
 String? userProfile;
-  Future<void> fetchRecipes() async {
-    allRecipes = await getRecipes();
-    updateFilteredRecipes();
-  }
+ Future<void> fetchRecipes() async {
+  allRecipes = await getRecipes();
+  setState(() {
+    filteredRecipes = List.from(allRecipes);
+  });
+}
+
 
   void updateFilteredRecipes() {
     if (_searchController.text.isNotEmpty) {
@@ -40,6 +43,7 @@ String? userProfile;
   @override
   void initState() {
     fetchRecipes();
+    filteredRecipes = List.from(allRecipes);
     super.initState();
   }
 

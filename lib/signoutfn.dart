@@ -5,7 +5,7 @@ import 'package:prj1/services/auth_service.dart';
 import 'package:prj1/userhome/bottomnav.dart';
 
 class UserHome extends StatefulWidget {
-   UserHome({Key? key}) : super(key: key);
+   const UserHome({Key? key}) : super(key: key);
 
   @override
   State<UserHome> createState() => _UserHomeState();
@@ -25,9 +25,10 @@ class _UserHomeState extends State<UserHome> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async{ 
+         // ignore: await_only_futures
          await authService.signOut;
          // ignore: use_build_context_synchronously
-         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => BottomNav(),), (route) => false);
+         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const BottomNav(),), (route) => false);
          
         }, // You can change the icon based on your requirement
         backgroundColor: Colors.blue,

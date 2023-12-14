@@ -1,3 +1,4 @@
+// ignore: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -187,7 +188,7 @@ class _LoginState extends State<Login> {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(
                                                   builder: ((context) =>
-                                                      Register())));
+                                                      const Register())));
                                         },
                                         
                                           child: Text(
@@ -197,7 +198,7 @@ class _LoginState extends State<Login> {
                                                     255, 11, 238, 94)),
                                           ),
                                         ),
-                                  ),SizedBox(width:18,),
+                                  ),const SizedBox(width:18,),
                                   Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
@@ -281,7 +282,7 @@ class _LoginState extends State<Login> {
           await HelperFunctions.saveUserEmailSF(email);
           await HelperFunctions.saveUserNameSF(snapshot.docs[0]['email']);
 
-          // ignore: use_build_context_synchronously
+          // ignore: u se_build_context_synchronously
           nextScreenReplace(context, Page, FirebaseAuth.instance.currentUser!.uid);
         } else if (UserCredentialConstant.admin == value) {
           Navigator.pushAndRemoveUntil(

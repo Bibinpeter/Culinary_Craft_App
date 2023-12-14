@@ -15,6 +15,7 @@ class BurgerList extends StatefulWidget {
   final String selectedCategory;
 
   @override
+  // ignore: library_private_types_in_public_api
   _BurgerListState createState() => _BurgerListState();
 }
 
@@ -70,6 +71,7 @@ class _BurgerListState extends State<BurgerList> {
                     title: Padding(
                       padding: const EdgeInsets.only(right: 40),
                       child: Text(
+                        // ignore: prefer_interpolation_to_compose_strings
                         "${"Your " + post["name"]} List",
                         style: GoogleFonts.poppins(
                           fontSize: 22,
@@ -166,7 +168,7 @@ class _BurgerListState extends State<BurgerList> {
                                       ),
                                       Text(
                                         "${category.time}min",
-                                        style: GoogleFonts.poppins(color: Color.fromARGB(255, 255, 255, 255)),
+                                        style: GoogleFonts.poppins(color: const Color.fromARGB(255, 255, 255, 255)),
                                       ),
                                     ],
                                   ),

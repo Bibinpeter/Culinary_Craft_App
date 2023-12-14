@@ -11,9 +11,11 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:prj1/userhome/about_page.dart';
 import 'package:prj1/userhome/termsandpri_page.dart';
 
+// ignore: camel_case_types
 class userP4 extends StatefulWidget {
   final String? userId;
   final String? nameofuser;
+  // ignore: prefer_const_constructors_in_immutables
   userP4({
     Key? key,
     this.userId,
@@ -27,6 +29,7 @@ class userP4 extends StatefulWidget {
 AuthService authService = AuthService();
 Stream<DocumentSnapshot>? userDatastream;
 
+// ignore: camel_case_types
 class _userP4State extends State<userP4> {
   String? emailofuser;
   String? nameofuser;
@@ -157,7 +160,7 @@ class _userP4State extends State<userP4> {
                               );
                             }
                             if (!snapshot.hasData) {
-                              print('no stream');
+                             
                               return const CircleAvatar(
                                 backgroundColor: Colors.black,
                                 radius: 20,
@@ -172,10 +175,8 @@ class _userP4State extends State<userP4> {
                               debugPrint('url on profile: $userProfile');
 
                               return CircleAvatar(
-                                backgroundImage: userProfile == ""
-                                    ? Image.asset('assets/images/user4.png')
-                                        .image
-                                    : Image.network(userProfile ?? "").image,
+                                backgroundImage: userProfile == ""? Image.asset('assets/images/user4.png').image :
+                                 Image.network(userProfile ?? "").image,
                                 radius: 20,
                               );
                             }
@@ -210,12 +211,12 @@ class _userP4State extends State<userP4> {
                InkWell(
                   onTap: () {
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => TermsandPrivacy()),
+                      MaterialPageRoute(builder: (context) => const TermsandPrivacy()),
                     );
                   },
                   child: ProfileDetailCard(
                     label: 'Terms and privacy',
-                    value: '',
+                    value: 'Describes our policy',
                   ),
                 ),
                 InkWell(
@@ -226,7 +227,7 @@ class _userP4State extends State<userP4> {
                   },
                   child: ProfileDetailCard(
                     label: 'About us',
-                    value: ' ',
+                    value: 'version',
                   ),
                 ),
               ],

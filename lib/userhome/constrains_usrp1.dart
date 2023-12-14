@@ -19,13 +19,13 @@ const FOOD_DATA = [
     "image":"cola.png"
   },
   {
-    "name":"Fries",
+    "name":"fries",
     "brand":"Crisp of Perfectly Cooked Fries!",
     "Time":"29 min",
     "image":"fries.png"
   },
   {
-    "name":"Desserts",   
+    "name":"Dessert",   
     "brand":"Irresistible Dessert Delights",
    "Time":"49 min",
     "image":"ice_cream.png"

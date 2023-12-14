@@ -30,6 +30,7 @@ class _AdminHomeState extends State<AdminHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       backgroundColor: const Color.fromARGB(255, 68, 77, 101),
       body: ValueListenableBuilder(
         valueListenable: foodlists,
@@ -58,6 +59,7 @@ class _AdminHomeState extends State<AdminHome> {
                             crossAxisCount: 3,
                           ),
                           itemCount: value.length,
+                          // ignore: non_constant_identifier_names
                           itemBuilder: (context, Index) {
                             return InkWell(
                               onTap: () {
@@ -118,6 +120,7 @@ class _AdminHomeState extends State<AdminHome> {
             builder: (context) => Admin(),
           ));
         },
+        // ignore: sort_child_properties_last
         child: const Icon(Icons.add),
         backgroundColor: Colors.blue,
       ),
@@ -132,14 +135,13 @@ Future<void> deletePhoto(int key) async {
   // Check if the box is empty
   if (photoBox.isEmpty) {
     // Handle the case where the box is empty
-    print('The photos box is empty. Cannot delete.');
     return;
   }
 
   // Check if the key is within a valid range
   if (key < 0 || key >= photoBox.length) {
-    // Handle the case where the key is out of range
-    print('Invalid key. Cannot delete photo at index $key.');
+    // Handle the case where the key is out of range                                                           
+    
     return;
   }
 

@@ -18,7 +18,7 @@ class DatabaseService {
         "profile":profile,
       });
     } catch (error) {
-      print("Error saving user data: $error");
+      
       // You might want to throw an exception or handle the error in a way that makes sense for your application
     }
   }
@@ -28,7 +28,7 @@ class DatabaseService {
     try {
       return await userCollection.where("email", isEqualTo: email).get();
     } catch (error) {
-      print("Error getting user data: $error");
+      
       // You might want to throw an exception or handle the error in a way that makes sense for your application
       rethrow;
     }

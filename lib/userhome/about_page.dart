@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class About extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const About({Key? key});
 
   @override
@@ -16,7 +17,7 @@ class About extends StatelessWidget {
         ),
       ),
       body:  Padding(
-        padding: EdgeInsets.all(22.0),
+        padding: const EdgeInsets.all(22.0),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(

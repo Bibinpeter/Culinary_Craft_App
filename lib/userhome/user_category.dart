@@ -6,6 +6,7 @@ import 'package:prj1/userhome/country_maplist.dart';
 import 'package:prj1/userhome/details_page.dart';
 
 class UsesP3 extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   UsesP3({super.key});
 
   @override
@@ -28,7 +29,7 @@ class _UsesP3State extends State<UsesP3> {
           onTap: () {
             fetchRecipesByCategory(categoryofFood: post1['names']);
             Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => Details()));
+                .push(MaterialPageRoute(builder: (context) => const Details()));
           },
           child: Container(
             height: 150,

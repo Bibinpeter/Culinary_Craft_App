@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+ 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
 
@@ -60,6 +60,7 @@ class AuthService {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       if (googleUser == null) throw Null;
+      // ignore: unnecessary_nullable_for_final_variable_declarations
       final GoogleSignInAuthentication? googleAuth =
           await googleUser.authentication;
 

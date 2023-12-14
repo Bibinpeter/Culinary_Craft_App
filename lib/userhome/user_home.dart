@@ -19,7 +19,7 @@ class UserPage1 extends StatefulWidget {
 class _UserPage1State extends State<UserPage1> {
   List<Recipe> recipelist = [];
   List<Widget> itemsData = [];
-  final CategoriesScroller categoriesScroller = CategoriesScroller(
+  final CategoriesScroller categoriesScroller = const CategoriesScroller(
     recipelist: [],
   );
   ScrollController controller = ScrollController();
@@ -383,10 +383,10 @@ class CategoriesScroller extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell(
+                InkWell( 
                   onTap: () {
                     List<Recipe> listset = [];
-                    for (var v = 0; v < recipelist.length - 3; v++) {
+                    for (var v = 0; v < recipelist.length - 5; v++) { 
                       listset.add(recipelist[v]);
                     }
 
@@ -438,51 +438,7 @@ class CategoriesScroller extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  width: 150, 
-                  margin: const EdgeInsets.only(right: 20),
-                  height: categoryHeight,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Stack(
-                      children: <Widget>[
-                        const FadeInImage(
-                          placeholder: AssetImage(
-                              "assets/images/foodplaceholder.png"), // Replace with your placeholder image
-                          image: AssetImage(
-                              "assets/images/Alex Lau Food — 2D Creative Artists.jpeg"),
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  right: 30,
-                                ),
-                                child: Text(
-                                  " Easiest\n",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+               
               ]),
             )));
   }

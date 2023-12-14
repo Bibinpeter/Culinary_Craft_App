@@ -2,6 +2,8 @@
 
 
 
+// ignore_for_file: invalid_use_of_visible_for_testing_member
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -38,12 +40,12 @@ Future<void> deleteRecipe(int key) async {
   final recipeBox = await Hive.openBox<Recipe>('recipes');
 
   if (recipeBox.isEmpty) {
-    print('The recipes box is empty. Cannot delete.');
+    
     return;
   }
 
   if (key < 0 || key >= recipeBox.length) {
-    print('Invalid key. Cannot delete recipe at index $key.');
+     
     return;
   }
 
@@ -59,6 +61,7 @@ Future<void> fetchRecipesByCategory({required String categoryofFood}) async {
           (food) => food.category.toLowerCase() == categoryofFood.toLowerCase())
       .toList();
   recipenotifier.value = categryList.toList();
+  // ignore: invalid_use_of_protected_member
   recipenotifier.notifyListeners();
 }
  
@@ -78,9 +81,9 @@ Future<void> addAndRemoveFavorite(Recipe recipe) async {
   } else {
     recipe.favoritesUserIds.add(currentUserId);
   }
-print("=--------------->>>>>${recipe.favoritesUserIds}");
+ 
   
-  print('fav user id in ${recipe.title} is ${recipe.favoritesUserIds}');
+  
   await updateRecipe(recipe, await getKey(recipe));
   await getFavorites();
 }

@@ -39,8 +39,8 @@ class _BottomNavState extends State<BottomNav> {
       body: IndexedStack(
         index: _currentIndex,
         children:  [
-           UserPage1(),
-        UsesP2(),
+           const UserPage1(),
+        const UsesP2(),
         UsesP3(),
            userP4(userId: userId),
         ],
@@ -159,17 +159,17 @@ class _BounceTabBarState extends State<BounceTabBar>
             child: Container(
               width: currentWidth,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-                color: Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(25.0)),
+                color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.7),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: List.generate(widget.items.length, (index) {
                   final child = widget.items[index];
-                  final buttonRadius = 28.0;
+                  const buttonRadius = 28.0;
                   final innerWidget = CircleAvatar(
                     radius: buttonRadius,
-                    backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                    backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                     child: child,
                   );
                   if (index == _currentIndex) {
@@ -228,7 +228,7 @@ class _CircleItemPainter extends CustomPainter {
           Center,
           radius,
           Paint()
-            ..color = Color.fromARGB(255, 57, 182, 255)
+            ..color = const Color.fromARGB(255, 57, 182, 255)
             ..style = PaintingStyle.stroke
             ..strokeWidth = currentStrokeWidth);
     }

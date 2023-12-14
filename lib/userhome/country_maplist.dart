@@ -1,4 +1,4 @@
-// ignore: constant_identifier_names
+// ignore: constant_identifier_names, non_constant_identifier_names
 final COUNTRY_LIST = [
   {
     "names":"Indian",

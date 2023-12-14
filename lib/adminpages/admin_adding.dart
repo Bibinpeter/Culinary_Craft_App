@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:prj1/adminpages/admingridvw.dart';
@@ -7,6 +9,7 @@ import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/models/category.dart';
 import 'package:prj1/models/model.dart';
 
+// ignore: use_key_in_widget_constructors
 class Admin extends StatefulWidget {
   @override
   State<Admin> createState() => _AdminLoginState();

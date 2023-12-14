@@ -5,7 +5,8 @@ import 'package:prj1/userhome/Login.dart';
 class LogoutButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  LogoutButton({required this.onPressed});
+  // ignore: use_key_in_widget_constructors
+  const LogoutButton({required this.onPressed});
 
 
 
@@ -14,11 +15,12 @@ class LogoutButton extends StatelessWidget {
     return Center(
       child: ElevatedButton(onPressed: () async {
   await AuthService().signOut();
+  // ignore: use_build_context_synchronously
   Navigator.of(context).pushAndRemoveUntil(
-    MaterialPageRoute(builder: (context) => Login()),
+    MaterialPageRoute(builder: (context) => const Login()),
     (route) => false,
   );
-}, child: Text('logout')),
+}, child: const Text('logout')),
 
     );
   }

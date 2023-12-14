@@ -34,7 +34,7 @@ class _Page4State extends State<Page4> {
     if (!_isLoading) {
       // ignore: use_build_context_synchronously
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: ((context) => Login())));
+          .push(MaterialPageRoute(builder: ((context) => const Login())));
     }
   }
 

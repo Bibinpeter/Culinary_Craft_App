@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MyApp());
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -13,13 +14,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: use_key_in_widget_constructors
 class ResetPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _ResetPageState createState() => _ResetPageState();
 }
 
 class _ResetPageState extends State<ResetPage> {
-  TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String email = "";
 
