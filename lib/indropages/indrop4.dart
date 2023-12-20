@@ -14,23 +14,20 @@ class _Page4State extends State<Page4> {
   bool _isLoading = false;
   final spinkits = const SpinKitChasingDots(
     size: 52,
-    color: Color.fromARGB(255, 0, 0, 0)
+    color: Color.fromARGB(255, 0, 0, 0),
   );
 
   void _handleFloatingButtonTap() async {
     setState(() {
-      _isLoading = true;  
+      _isLoading = true;
     });
 
-     
     await Future.delayed(const Duration(seconds: 3));
 
     setState(() {
-      _isLoading =
-          false;  
+      _isLoading = false;
     });
 
-     
     if (!_isLoading) {
       // ignore: use_build_context_synchronously
       Navigator.of(context)
@@ -40,9 +37,13 @@ class _Page4State extends State<Page4> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen size
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 19, 41, 65),
-        body: Stack(children: [
+      backgroundColor: const Color.fromARGB(255, 19, 41, 65),
+      body: Stack(
+        children: [
           Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 2),
@@ -54,22 +55,23 @@ class _Page4State extends State<Page4> {
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.all(
-                      Radius.circular(30.0)), 
+                    Radius.circular(30.0),
+                  ),
                 ),
-                height: 600,  
-                width: 350,  
+                height: screenSize.height * 0.8, // Adjusted for different screen sizes
+                width: screenSize.width * 0.9, // Adjusted for different screen sizes
               ),
             ),
           ),
           Positioned(
-            bottom: 50,  
-            right: 20,  
+            bottom: 50,
+            right: 20,
             child: Stack(
               alignment: Alignment.center,
               children: [
                 FloatingActionButton(
                   onPressed: () {
-                    _handleFloatingButtonTap();  
+                    _handleFloatingButtonTap();
                   },
                   backgroundColor: const Color.fromARGB(255, 255, 255, 255),
                   shape: const CircleBorder(),
@@ -83,15 +85,27 @@ class _Page4State extends State<Page4> {
             ),
           ),
           const Padding(
-            padding: EdgeInsets.only(top: 690,left: 30),
-            child: Text("Do more in quick and easy away. ",style: TextStyle(  color: Color.fromARGB(255, 157, 161, 165),fontSize: 18),
-          )
+            padding: EdgeInsets.only(top: 730, left: 60),
+            child: Text(
+              "Do in a quick and easy way. ",
+              style: TextStyle(
+                color: Color.fromARGB(255, 157, 161, 165),
+                fontSize: 18,
+              ),
+            ),
           ),
-           const Padding(
-            padding: EdgeInsets.only(top: 708 ,left: 315, ),
-            child: Text("Login",style: TextStyle(  color: Color.fromARGB(255, 255, 255, 255),fontSize: 16),
-          )
-          )
-        ]));
+          const Padding(
+            padding: EdgeInsets.only(top: 708, left: 315),
+            child: Text(
+              "Login",
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

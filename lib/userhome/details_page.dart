@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +13,7 @@ class Details extends StatefulWidget {
 }
 
 class _DetailsState extends State<Details> {
- late ScrollController _scrollController;
+  late ScrollController _scrollController;
   @override
   void initState() {
     super.initState();
@@ -27,8 +26,9 @@ class _DetailsState extends State<Details> {
         body: Stack(
       children: <Widget>[
         //////////////////////////////////////background image.................
-       const FadeInImage(
-          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
+        const FadeInImage(
+          placeholder: AssetImage(
+              "assets/images/foodplaceholder.png"), // Replace with your placeholder image
           image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
           width: double.infinity,
           height: double.infinity,
@@ -69,13 +69,15 @@ class _DetailsState extends State<Details> {
                       fit: StackFit.expand,
                       children: [
                         // Place the ColorFiltered Container below the Image
-                      const FadeInImage(
-          placeholder: AssetImage("assets/images/foodplaceholder.png"), // Replace with your placeholder image
-          image: AssetImage("assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
-        ),
+                        const FadeInImage(
+                          placeholder: AssetImage(
+                              "assets/images/foodplaceholder.png"), // Replace with your placeholder image
+                          image: AssetImage(
+                              "assets/images/julius-9zy3GaH8NKM-unsplash.jpg"),
+                          width: double.infinity,
+                          height: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                         Container(
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
@@ -101,12 +103,17 @@ class _DetailsState extends State<Details> {
                     itemCount: foodlists.length,
                     itemBuilder: (context, index) {
                       var category = foodlists[index];
-                      var imageUrl = category.photo;
+                  
 
                       return InkWell(
                         onTap: () {
-                         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
-                         ProductItemScreen(recipe: category, userProfile: userProfile, userId: FirebaseAuth.instance.currentUser!.uid),)); 
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) => ProductItemScreen(
+                                recipe: category,
+                                userProfile: userProfile,
+                                userId: FirebaseAuth.instance.currentUser!.uid),
+                          ));
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
@@ -125,8 +132,8 @@ class _DetailsState extends State<Details> {
                                           .withOpacity(0.2),
                                       BlendMode.multiply,
                                     ),
-                                    child: Image.file(
-                                      File(imageUrl),
+                                    child: Image.network(
+                                      'https://firebasestorage.googleapis.com/v0/b/recipes-d05de.appspot.com/o/Burger%2Fburger1.jpg?alt=media&token=b99d49d5-81e1-4cc4-9d77-9f8f4e5650fb', // Replace with your actual network image URL
                                       fit: BoxFit.cover,
                                       height: 200,
                                       width: double.infinity,
@@ -149,18 +156,21 @@ class _DetailsState extends State<Details> {
                                       Text(
                                         category.time,
                                         style: GoogleFonts.poppins(
-                                            color: const Color.fromARGB(255, 255, 255, 255)),
+                                            color: const Color.fromARGB(
+                                                255, 255, 255, 255)),
                                       )
                                     ],
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 170, left: 10),
+                                  padding:
+                                      const EdgeInsets.only(top: 170, left: 10),
                                   child: Text(
                                     category.title,
                                     style: GoogleFonts.poppins(
                                       fontSize: 18,
-                                      color: const Color.fromARGB(255, 255, 255, 255)
+                                      color: const Color.fromARGB(
+                                              255, 255, 255, 255)
                                           .withOpacity(0.7),
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -175,11 +185,6 @@ class _DetailsState extends State<Details> {
               },
             )),
       ],
-    )
-    );
-          }
-        
-      
-    
+    ));
   }
-
+}

@@ -3,11 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:prj1/userhome/Login.dart';
 
 class Page1 extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  const Page1({Key? key});
+   // ignore: use_key_in_widget_constructors
+   const Page1({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen size
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 19, 41, 65),
       body: Center(
@@ -23,8 +26,8 @@ class Page1 extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.all(Radius.circular(30.0)),
               ),
-              height: 600,
-              width: 350,
+              height: screenSize.height * 0.75, // Adjusted for different screen sizes
+              width: screenSize.width * 0.9, // Adjusted for different screen sizes
             ),
             const SizedBox(
                 height: 16), // Add space between image and FloatingActionButton
@@ -34,9 +37,8 @@ class Page1 extends StatelessWidget {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          
           Padding(
-            padding: const EdgeInsets.only(right: 280,top:00 ),
+            padding: EdgeInsets.only(right: screenSize.width * 0.74, top: 0),
             child: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -54,8 +56,8 @@ class Page1 extends StatelessWidget {
               height: 6), // Add space between FloatingActionButton and Text
           Column(
             children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 280),
+              Padding(
+                padding: EdgeInsets.only(right: screenSize.width * 0.74),
                 child: Text(
                   "Skip",
                   style: TextStyle(
@@ -64,14 +66,17 @@ class Page1 extends StatelessWidget {
                   ),
                 ),
               ),
-             Text("Step in to the easy cooking",style: GoogleFonts.poppins(fontSize: 18 ,color:  const Color.fromARGB(255, 157, 161, 165),),)
+              Text(
+                "Step into the easy cooking",
+                style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  color: const Color.fromARGB(255, 157, 161, 165),
+                ),
+              )
             ],
           ),
-            
         ],
-        
       ),
-      
     );
   }
 }

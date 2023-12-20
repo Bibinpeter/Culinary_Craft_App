@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:prj1/adminpages/constants/constants.dart';
 import 'package:prj1/indropages/showp.dart';
 import 'package:prj1/indropages/widgets/helper/helper.dart';
 import 'package:prj1/models/model.dart';
@@ -17,7 +18,7 @@ void main() async {
   } else {
     await Firebase.initializeApp();
   }
-
+   addDatainitialy();
   runApp(const MyApp());
 }
 

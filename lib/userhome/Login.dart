@@ -1,4 +1,6 @@
-// ignore: file_names
+
+
+// ignore_for_file: file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -282,7 +284,7 @@ class _LoginState extends State<Login> {
           await HelperFunctions.saveUserEmailSF(email);
           await HelperFunctions.saveUserNameSF(snapshot.docs[0]['email']);
 
-          // ignore: u se_build_context_synchronously
+          // ignore: u se_build_context_synchronously, use_build_context_synchronously
           nextScreenReplace(context, Page, FirebaseAuth.instance.currentUser!.uid);
         } else if (UserCredentialConstant.admin == value) {
           Navigator.pushAndRemoveUntil(

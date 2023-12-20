@@ -21,6 +21,7 @@ class _UserPage1State extends State<UserPage1> {
   List<Widget> itemsData = [];
   final CategoriesScroller categoriesScroller = const CategoriesScroller(
     recipelist: [],
+   
   );
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
@@ -126,6 +127,7 @@ class _UserPage1State extends State<UserPage1> {
 
   @override
   Widget build(BuildContext context) {
+ 
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.30;
     ////////////scaffold//////////////////
@@ -197,6 +199,7 @@ class _UserPage1State extends State<UserPage1> {
             /////////////////////////////carousel/////////////////////////////
             CarouselSlider(
               options: CarouselOptions(
+                
                 autoPlay: true,
                 height: 200,
                 autoPlayCurve: Curves.fastOutSlowIn,
@@ -207,6 +210,7 @@ class _UserPage1State extends State<UserPage1> {
                 animateToClosest: true,
                 viewportFraction: 0.9,
                 onPageChanged: (index, reason) {},
+                
               ),
               items: <Widget>[
                 for (int i = 0; i < recipelist.length; i++)
@@ -214,11 +218,11 @@ class _UserPage1State extends State<UserPage1> {
                     borderRadius: BorderRadius.circular(15),
                     child: Stack(
                       children: [
-                        FadeInImage(
+                         FadeInImage(
                           fadeInCurve: Curves.bounceInOut,
-                          placeholder: const AssetImage(
-                              'assets/images/foodplaceholder.png'),
-                          image: FileImage(File(recipelist[i].photo)),
+                          placeholder:
+                              const AssetImage('assets/images/foodplaceholder.png'),
+                          image: NetworkImage(recipelist[i].photo), // Use NetworkImage for network images
                           fit: BoxFit.fitWidth,
                           width: 370,
                         ),
@@ -383,62 +387,60 @@ class CategoriesScroller extends StatelessWidget {
                     ),
                   ),
                 ),
-                InkWell( 
-                  onTap: () {
-                    List<Recipe> listset = [];
-                    for (var v = 0; v < recipelist.length - 5; v++) { 
-                      listset.add(recipelist[v]);
-                    }
+             InkWell(
+  onTap: () {
+    // Assuming the last 5 items are the latest ones
+    List<Recipe> latestList = recipelist.sublist(recipelist.length - 5,recipelist.length,);
 
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: ((context) =>
-                            Latest(recipelist: listset.toList()))));
-                  },
-                  child: Container(
-                    width: 160,
-                    margin: const EdgeInsets.only(right: 20),
-                    height: categoryHeight,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Stack(
-                        children: <Widget>[
-                          const FadeInImage(
-                            placeholder: AssetImage(
-                                "assets/images/foodplaceholder.png"), // Replace with your placeholder image
-                            image: AssetImage("assets/images/Advertising.jpeg"),
-                            width: double.infinity,
-                            height: double.infinity,
-                            fit: BoxFit.cover,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    right: 30,
-                                  ),
-                                  child: Text(
-                                    "Latest",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: ((context) => Latest(recipelist: latestList)),
+    ));
+  },
+  child: Container(
+    width: 160,
+    margin: const EdgeInsets.only(right: 20),
+    height: categoryHeight,
+    decoration: const BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: Stack(
+        children: <Widget>[
+          const FadeInImage(
+            placeholder: AssetImage("assets/images/foodplaceholder.png"),
+            image: AssetImage("assets/images/Advertising.jpeg"),
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 30,
+                  ),
+                  child: Text(
+                    "Latest",
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      color: Colors.white,
                     ),
                   ),
                 ),
-               
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
+
               ]),
             )));
   }

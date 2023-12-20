@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,14 +18,13 @@ class _UsesP2State extends State<UsesP2> {
   final TextEditingController _searchController = TextEditingController();
   List<Recipe> allRecipes = [];
   List<Recipe> filteredRecipes = [];
-String? userProfile;
- Future<void> fetchRecipes() async {
-  allRecipes = await getRecipes();
-  setState(() {
-    filteredRecipes = List.from(allRecipes);
-  });
-}
-
+  String? userProfile;
+  Future<void> fetchRecipes() async {
+    allRecipes = await getRecipes();
+    setState(() {
+      filteredRecipes = List.from(allRecipes);
+    });
+  }
 
   void updateFilteredRecipes() {
     if (_searchController.text.isNotEmpty) {
@@ -56,7 +55,7 @@ String? userProfile;
       recipesByCategory[recipe.category]!.add(recipe);
     }
 
-    return Scaffold(  
+    return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
@@ -76,7 +75,7 @@ String? userProfile;
               padding: const EdgeInsets.all(35.0),
               child: TextFormField(
                 onChanged: (value) {
-                  setState(() {  
+                  setState(() {
                     updateFilteredRecipes();
                   });
                 },
@@ -98,12 +97,12 @@ String? userProfile;
               ),
             ),
             if (filteredRecipes.isEmpty)
-            
               Padding(
                 padding: const EdgeInsets.all(98.0),
-                child: Lottie.asset("assets/images/searchnot found.json",),
+                child: Lottie.asset(
+                  "assets/images/searchnot found.json",
+                ),
               )
-              
             else
               Expanded(
                 child: Padding(
@@ -144,8 +143,14 @@ String? userProfile;
                                           MaterialPageRoute(
                                               builder: (context) =>
                                                   ProductItemScreen(
-                                                      recipe: recipesInCategory[
-                                                          index],userId: FirebaseAuth.instance.currentUser!.uid,userProfile: userProfile,)),
+                                                    recipe: recipesInCategory[
+                                                        index],
+                                                    userId: FirebaseAuth
+                                                        .instance
+                                                        .currentUser!
+                                                        .uid,
+                                                    userProfile: userProfile,
+                                                  )),
                                         );
                                       },
                                       child: Stack(
@@ -176,8 +181,7 @@ String? userProfile;
                                                 child: FadeInImage(
                                                   placeholder: const AssetImage(
                                                       "assets/images/foodplaceholder.png"),
-                                                  image: FileImage(File(
-                                                      recipesInCategory[index].photo)),
+                                                  image: NetworkImage(recipesInCategory[index].photo), // Assuming photo is a URL
                                                   width: 140,
                                                   height: 200,
                                                   fit: BoxFit.cover,
@@ -214,4 +218,4 @@ String? userProfile;
       ),
     );
   }
-}   
+}

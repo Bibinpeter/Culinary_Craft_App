@@ -146,8 +146,8 @@ class _BurgerListState extends State<BurgerList> {
                                     },
                                     blendMode: BlendMode.dstIn,
                                     child: FadeInImage(
-                                      placeholder: const AssetImage('assets/images/foodplaceholder.png'),
-                                      image: FileImage(File(imageUrl)),
+                                      placeholder: AssetImage('assets/images/foodplaceholder.png'),
+                                      image:NetworkImage(imageUrl),
                                       fit: BoxFit.cover,
                                       height: 200,
                                       width: double.infinity,

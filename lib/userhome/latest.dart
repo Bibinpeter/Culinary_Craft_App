@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,12 +72,13 @@ class _LatestState extends State<Latest> {
                     child: Stack(
                       children: [
                         FadeInImage(
-                          placeholder: const AssetImage("assets/images/foodplaceholder.png"),
-                          image: FileImage(File(widget.recipelist[index].photo)),
-                          width: double.infinity,
-                          height: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
+  placeholder: const AssetImage("assets/images/foodplaceholder.png"),
+  image: NetworkImage(widget.recipelist[index].photo), // Use NetworkImage for network images
+  width: double.infinity,
+  height: double.infinity,
+  fit: BoxFit.cover,
+),
+
                         Positioned.fill(
                           child: Container(
                             decoration: BoxDecoration(

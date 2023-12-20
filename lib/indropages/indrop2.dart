@@ -6,6 +6,9 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen size
+    var screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 19, 41, 65),
       body: Center(
@@ -13,7 +16,7 @@ class Page2 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: screenSize.height * 0.05),
               child: Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
@@ -21,16 +24,15 @@ class Page2 extends StatelessWidget {
                         "assets/images/chicken-soup-with-vegetables-spices-homemade-noodles-dark-table.jpg"),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.all(
-                      Radius.circular(30.0)),  
+                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
                 ),
-                height: 600,  
-                width: 350,  
+                height: screenSize.height * 0.8, // Adjusted for different screen sizes
+                width: screenSize.width * 0.9, // Adjusted for different screen sizes
               ),
             ),
-            const SizedBox(height: 20),  
+            const SizedBox(height: 20),
             const Text(
-              "Try the new premium recipies.",
+              "Try the new premium recipes.",
               style: TextStyle(
                 color: Color.fromARGB(255, 157, 161, 165),
                 fontSize: 18,

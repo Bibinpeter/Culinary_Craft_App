@@ -12,8 +12,9 @@ class FavoritesPage extends StatefulWidget {
   @override
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
-   String? userProfile;
-  
+
+String? userProfile;
+
 class _FavoritesPageState extends State<FavoritesPage> {
   @override
   void initState() {
@@ -93,7 +94,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => ProductItemScreen(
-                                        recipe: value[index],userProfile: userProfile,userId: FirebaseAuth.instance.currentUser!.uid,)),
+                                          recipe: value[index],
+                                          userProfile: userProfile,
+                                          userId: FirebaseAuth
+                                              .instance.currentUser!.uid,
+                                        )),
                               );
                             },
                             child: ClipRRect(
@@ -101,8 +106,8 @@ class _FavoritesPageState extends State<FavoritesPage> {
                               child: Stack(
                                 fit: StackFit.expand,
                                 children: [
-                                  Image(
-                                    image: FileImage(File(value[index].photo)),
+                                   Image(
+                                    image: NetworkImage(value[index].photo), // Use NetworkImage for network images
                                     fit: BoxFit.cover,
                                   ),
                                   Container(

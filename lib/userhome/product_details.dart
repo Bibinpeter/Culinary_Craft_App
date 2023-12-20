@@ -1,4 +1,4 @@
-import 'dart:io';
+
 import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,7 +10,10 @@ import 'package:prj1/services/database_services.dart';
 
 class ProductItemScreen extends StatefulWidget {
   const ProductItemScreen(
-      {Key? key, required this.recipe, required this.userProfile,required this.userId})
+      {Key? key,
+      required this.recipe,
+      required this.userProfile,
+      required this.userId})
       : super(key: key);
 
   final Recipe recipe;
@@ -85,13 +88,12 @@ class _ProductItemScreenState extends State<ProductItemScreen>
       child: Scaffold(
         body: Stack(
           children: [
-            SizedBox(
+             SizedBox(
               width: double.infinity,
               child: FadeInImage(
                 fadeInCurve: Curves.bounceInOut,
-                placeholder:
-                    const AssetImage("assets/images/foodplaceholder.png"),
-                image: FileImage(File(widget.recipe.photo)),
+                placeholder: const AssetImage("assets/images/foodplaceholder.png"),
+                image: NetworkImage(widget.recipe.photo), // Replace with the actual URL
                 width: double.infinity,
                 height: 340,
                 fit: BoxFit.cover,
@@ -149,7 +151,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
           padding: const EdgeInsets.symmetric(horizontal: 20),
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
-            color:Color.fromARGB(255, 255, 255, 255),     
+            color: Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
@@ -207,10 +209,7 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                           child: Image.asset('assets/images/user4.png'),
                         );
                       }
-                      if (!snapshot.hasData) {
-                        
-                       
-                      }
+                      if (!snapshot.hasData) {}
                       if (snapshot.hasData) {
                         final userDataSnapshot =
                             snapshot.data!.data() as Map<String, dynamic>;
@@ -308,8 +307,8 @@ class _ProductItemScreenState extends State<ProductItemScreen>
                   ),
                 ),
                 Text(
-                  "Ingredients",
-                  style: GoogleFonts.poppins(fontSize: 21 ),
+                  "incredients",
+                  style: GoogleFonts.poppins(fontSize: 21),
                 ),
                 const SizedBox(
                   height: 10,

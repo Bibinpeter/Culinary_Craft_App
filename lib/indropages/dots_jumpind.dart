@@ -22,11 +22,11 @@ class Welcm extends StatelessWidget {
             height: 750 ,
             child: PageView(
               controller: _controller,
-              children: const[
+              children: [
                 Page1(),
-                Page2(),
-                Page3(),
-                Page4()
+                const Page2(),
+               const Page3(),
+                const Page4()
               ],
             ),
           ),
