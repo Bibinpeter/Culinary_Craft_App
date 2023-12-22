@@ -11,11 +11,10 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:prj1/userhome/about_page.dart';
 import 'package:prj1/userhome/termsandpri_page.dart';
 
-// ignore: camel_case_types
 class userP4 extends StatefulWidget {
   final String? userId;
   final String? nameofuser;
-  // ignore: prefer_const_constructors_in_immutables
+
   userP4({
     Key? key,
     this.userId,
@@ -29,27 +28,23 @@ class userP4 extends StatefulWidget {
 AuthService authService = AuthService();
 Stream<DocumentSnapshot>? userDatastream;
 
-// ignore: camel_case_types
 class _userP4State extends State<userP4> {
   String? emailofuser;
   String? nameofuser;
-  // String? userId = FirebaseAuth.instance.currentUser!.uid;
   String? imageUrl;
   String? userProfile;
+
   @override
   void initState() {
     super.initState();
-
     getUserEmailFromSF();
     getUserNameFromSF();
-    // userId=
     userDatastream = DatabaseService().getuserdetails(widget.userId ?? "");
     debugPrint('id on profile: ${widget.userId}');
   }
 
   Future<void> _showImagePicker(BuildContext context) async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     try {
       if (pickedFile != null) {
@@ -61,10 +56,40 @@ class _userP4State extends State<userP4> {
     } catch (e) {
       debugPrint(e.toString());
     }
-    await DatabaseService()
-        .userCollection
-        .doc(widget.userId)
-        .update({"profile": imageUrl});
+    await DatabaseService().userCollection.doc(widget.userId).update({"profile": imageUrl});
+  }
+
+  Future<void> _showLogoutConfirmationDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout Confirmation'),
+          content: const Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            ElevatedButton(
+              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll( Color.fromARGB(255, 48, 162, 151),)),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+               style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll( Color.fromARGB(255, 48, 162, 151),)),
+              onPressed: () {
+                authService.signOut();
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(builder: (context) => const Login()),
+                  (route) => false,
+                );
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -102,12 +127,7 @@ class _userP4State extends State<userP4> {
                             backgroundColor:
                                 const Color.fromARGB(255, 48, 162, 151),
                             onPressed: () {
-                              authService.signOut();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => const Login()),
-                                (route) => false,
-                              );
+                              _showLogoutConfirmationDialog(context);
                             },
                             child: const Icon(Icons.logout),
                           ),
@@ -153,14 +173,12 @@ class _userP4State extends State<userP4> {
                       child: StreamBuilder(
                           stream: userDatastream,
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
                               return Center(
                                 child: Image.asset('assets/images/user4.png'),
                               );
                             }
                             if (!snapshot.hasData) {
-                             
                               return const CircleAvatar(
                                 backgroundColor: Colors.black,
                                 radius: 20,
@@ -175,8 +193,9 @@ class _userP4State extends State<userP4> {
                               debugPrint('url on profile: $userProfile');
 
                               return CircleAvatar(
-                                backgroundImage: userProfile == ""? Image.asset('assets/images/user4.png').image :
-                                 Image.network(userProfile ?? "").image,
+                                backgroundImage: userProfile == ""
+                                    ? Image.asset('assets/images/user4.png').image
+                                    : Image.network(userProfile ?? "").image,
                                 radius: 20,
                               );
                             }
@@ -186,8 +205,7 @@ class _userP4State extends State<userP4> {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: CircleAvatar(
-                        backgroundColor:
-                            const Color.fromARGB(255, 56, 119, 112),
+                        backgroundColor: const Color.fromARGB(255, 56, 119, 112),
                         child: IconButton(
                           onPressed: () {
                             _showImagePicker(context);
@@ -201,14 +219,13 @@ class _userP4State extends State<userP4> {
                 const SizedBox(height: 20),
                 ProfileDetailCard(
                   label: 'Username',
-                  value: nameofuser ??
-                      '', // Use the loaded username or an empty string as a default
+                  value: nameofuser ?? '',
                 ),
                 ProfileDetailCard(
                   label: 'Email id',
                   value: emailofuser ?? '',
                 ),
-               InkWell(
+                InkWell(
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const TermsandPrivacy()),
@@ -227,7 +244,7 @@ class _userP4State extends State<userP4> {
                   },
                   child: ProfileDetailCard(
                     label: 'About us',
-                    value: 'version',
+                    value: 'version 1.0.0',
                   ),
                 ),
               ],
@@ -237,6 +254,7 @@ class _userP4State extends State<userP4> {
       ),
     );
   }
+
 
   getUserNameFromSF() async {
     await HelperFunctions.getUserNameFromSF().then((value) {

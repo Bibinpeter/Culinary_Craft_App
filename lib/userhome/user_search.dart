@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -181,7 +180,9 @@ class _UsesP2State extends State<UsesP2> {
                                                 child: FadeInImage(
                                                   placeholder: const AssetImage(
                                                       "assets/images/foodplaceholder.png"),
-                                                  image: NetworkImage(recipesInCategory[index].photo), // Assuming photo is a URL
+                                                  image: NetworkImage(
+                                                      recipesInCategory[index]
+                                                          .photo), // Assuming photo is a URL
                                                   width: 140,
                                                   height: 200,
                                                   fit: BoxFit.cover,

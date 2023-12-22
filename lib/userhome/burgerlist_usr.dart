@@ -1,6 +1,4 @@
 
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -146,7 +144,7 @@ class _BurgerListState extends State<BurgerList> {
                                     },
                                     blendMode: BlendMode.dstIn,
                                     child: FadeInImage(
-                                      placeholder: AssetImage('assets/images/foodplaceholder.png'),
+                                      placeholder: const AssetImage('assets/images/foodplaceholder.png'),
                                       image:NetworkImage(imageUrl),
                                       fit: BoxFit.cover,
                                       height: 200,

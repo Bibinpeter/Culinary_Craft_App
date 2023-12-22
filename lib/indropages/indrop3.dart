@@ -15,7 +15,7 @@ class Page3 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: screenSize.height * 0.05),
+              padding: EdgeInsets.only(top: screenSize.height * 0.0),
               child: Container(
                 decoration: const BoxDecoration(
                   image: DecorationImage(
