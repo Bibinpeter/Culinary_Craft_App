@@ -440,22 +440,7 @@ class CategoriesScroller extends StatelessWidget {
     ),
   ),
 ),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            InkWell(
+ InkWell(
 onTap: () {
   // Sort the entire recipelist based on the 'time' field in ascending order
   List<Recipe> latestList = List.from(recipelist)
