@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:prj1/adminpages/constants/constants.dart';
 import 'package:prj1/indropages/showp.dart';
@@ -13,8 +14,12 @@ void main() async {
   await Hive.initFlutter();
   await Firebase.initializeApp();
   
-   addDatainitialy();
-  runApp(const MyApp());
+addDatainitialy();
+SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+]);
+  runApp( const MyApp());
 }
 
 class MyApp extends StatefulWidget {
