@@ -6,6 +6,7 @@ import 'package:prj1/adminpages/hive_db.dart';
 import 'package:prj1/models/model.dart';
 import 'package:prj1/userhome/burgerlist_usr.dart';
 import 'package:prj1/userhome/constrains_usrp1.dart';
+import 'package:prj1/userhome/easypage.dart';
 import 'package:prj1/userhome/fav_page.dart';
 import 'package:prj1/userhome/latest.dart';
 
@@ -387,7 +388,7 @@ class CategoriesScroller extends StatelessWidget {
                     ),
                   ),
                 ),
-             InkWell(
+ InkWell(
   onTap: () {
     // Assuming the last 5 items are the latest ones
     List<Recipe> latestList = recipelist.sublist(recipelist.length - 5,recipelist.length,);
@@ -439,6 +440,84 @@ class CategoriesScroller extends StatelessWidget {
     ),
   ),
 ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            InkWell(
+onTap: () {
+  // Sort the entire recipelist based on the 'time' field in ascending order
+  List<Recipe> latestList = List.from(recipelist)
+    ..sort((a, b) => a.time.compareTo(b.time));
+
+  // Print the number of items in latestList (for debugging)
+  print('Number of items in latestList: ${latestList.length}');
+
+  // Take only the first 5 items
+  latestList = latestList.take(5).toList();
+
+  Navigator.of(context).push(MaterialPageRoute(
+    builder: ((context) => easypage(recipelist: latestList)),
+  ));
+},
+
+
+
+  child: Container(
+    width: 160,
+    margin: const EdgeInsets.only(right: 20),
+    height: categoryHeight,
+    decoration: const BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+    ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(20.0),
+      child: Stack(
+        children: <Widget>[
+          const FadeInImage(
+            placeholder: AssetImage("assets/images/foodplaceholder.png"),
+            image: AssetImage("assets/images/Alex Lau Food — 2D Creative Artists.jpeg"),
+            width: double.infinity,
+            height: double.infinity,
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(
+                    right: 30,
+                  ),
+                  child: Text(
+                    "Easy ",
+                    style: GoogleFonts.poppins(
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  ),
+),
+
 
 
               ]),

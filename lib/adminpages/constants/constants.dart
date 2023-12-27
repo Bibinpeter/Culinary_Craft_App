@@ -5,7 +5,7 @@ import 'package:prj1/models/model.dart';
 final List<Map<String, dynamic>> Data = [
   {
     'title': 'Chicken Burger',
-    'time': '30',
+    'time':'30',
     'description':
         'A chicken burger is a delicious variation of the classic hamburger, featuring a seasoned and cooked chicken patty as the star ingredient...',
     'incredients': '''
@@ -43,7 +43,7 @@ final List<Map<String, dynamic>> Data = [
   },
   {
     'title': 'Zinger Burger',
-    'time': '38',
+    'time':'38',
     'description':
         'Zinger burger is a popular and flavorful fast-food dish that originated from the combination of Western and Asian culinary influences. Typically associated with fast-food chains, the zinger burger features a seasoned and crispy fried chicken fillet, often marinated with a blend of spices, herbs, and buttermilk for added tenderness and flavor. The chicken fillet is then coated in a seasoned flour mixture and deep-fried until golden brown and crispy.',
     'incredients': '''
@@ -105,7 +105,7 @@ Enjoy your delicious Zinger Burger! Feel free to customize it with your favorite
   },
   {
     'title': 'Tomato Dip',
-    'time': '10',
+    'time':'10',
     'description':
         'This tomato dip is a burst of flavor, combining diced tomatoes, sautéed red onions, and garlic, elevated by a touch of olive oil and balsamic vinegar. Optional fresh basil adds a hint of freshness. Versatile and easy to make, it pairs seamlessly with your favorite dippers, making snack time a delightful experience with every dip.',
     'incredients': '''
@@ -150,7 +150,7 @@ Enjoy your homemade tomato dip as a flavorful accompaniment to your favorite sn
   },
   {
     'title': 'Rice Wrap',
-    'time': '18',
+    'time':'18',
     'description':
         'A rice wrap, often known as a rice paper roll or spring roll, is a light and refreshing dish typically filled with a variety of fresh vegetables, herbs, and sometimes protein, all enclosed in a translucent rice paper wrapper. ',
     'incredients': '''
@@ -213,7 +213,7 @@ Enjoy your light and tasty rice wraps! Feel free to customize the filling based 
   },
   {
     'title': 'Double X Burger',
-    'time': '38',
+    'time':'38',
     'description':
         'The burger is artfully layered with a medley of fresh, crisp ingredients. A generous spread of a special burger sauce, a tantalizing blend of creamy mayonnaise, tangy ketchup, and zesty Dijon mustard, sets the stage for a flavor explosion. Crisp lettuce adds a refreshing crunch, while juicy tomato slices bring a burst of succulence. Thin rings of red onion provide a subtle kick, harmonizing with the savory richness of the beef. ',
     'incredients': '''
@@ -265,7 +265,7 @@ Feel free to adjust the ingredients and quantities based on your preferences. En
   },
   {
     'title': 'veg Pizza',
-    'time': '48',
+    'time':'48',
     'description':
         'This vegetarian pizza is a delightful combination of a homemade, fluffy crust topped with a rich tomato sauce, gooey mozzarella cheese, and a vibrant array of colorful vegetables, including bell peppers, red onions, black olives, mushrooms, and cherry tomatoes. Finished with a sprinkle of fresh basil, this flavorful and satisfying pizza is a perfect choice for a wholesome and delicious meal.',
     'incredients': '''
@@ -327,7 +327,7 @@ Slice the veg pizza and serve hot. Enjoy your delicious homemade vegetarian pizz
   },
   {
     'title': 'Chicken Wrap',
-    'time': '28',
+    'time':'28',
     'description':
         'A delightful chicken wrap featuring seasoned and grilled chicken slices enveloped in a whole wheat or spinach tortilla. Topped with crisp lettuce, juicy tomatoes, crunchy cucumbers, and a blend of shredded cheese. Drizzled with a zesty mayonnaise and Greek yogurt sauce, this quick and easy recipe offers a perfect balance of flavors and textures in every bite. Customize with your favorite sauces or extras for a personalized touch. A delicious, portable meal for lunch or dinner that satisfies your cravings for a tasty and wholesome wrap experience.',
     'incredients': '''
@@ -382,7 +382,7 @@ Feel free to customize the ingredients and quantities based on your taste prefer
   },
   {
     'title': 'Beef Wrap',
-    'time': '23',
+    'time':'23',
     'description':
         'A Beef Wrap is a savory delight featuring thinly sliced, marinated beef enveloped in a soft tortilla. Complemented by a medley of fresh vegetables, such as lettuce, cucumber, and bell peppers, the wrap offers a perfect blend of textures and flavors. With a burst of aromatic herbs like cilantro, it a versatile and satisfying meal  both quick and delicious.',
     'incredients': '''
@@ -444,7 +444,7 @@ These beef wraps are versatile, and you can customize them with your favorite in
   },
   {
     'title': 'Blue berry stick',
-    'time': '18',
+    'time':'18',
     'description':
         'Blueberry Stick Ice Cream is a delightful frozen treat that combines the sweet and tart flavors of blueberries with the creamy goodness of ice cream. The addition of a stick makes it a convenient and mess-free option for enjoying this refreshing dessert. Perfect for hot summer days or any time you crave a fruity and creamy indulgence.',
     'incredients': '''
@@ -506,7 +506,7 @@ Now you have a tasty and visually appealing blueberry stick ice cream ready to b
   },
   {
     'title': 'Oreo shake',
-    'time': '8',
+    'time':'8',
     'description':
         'An Oreo shake is a delightful and indulgent beverage that combines the rich and creamy goodness of vanilla ice cream with the iconic chocolatey crunch of Oreo cookies. This classic shake is a perfect treat for anyone with a sweet tooth and is sure to satisfy your cravings for a deliciously cold and flavorful drink.',
     'incredients': '''
@@ -550,7 +550,7 @@ This recipe yields a delicious Oreo shake that combines the classic taste of van
   },
   {
     'title': 'Rainbow cake',
-    'time': '58',
+    'time':'58',
     'description':
         'A rainbow cake is a vibrant and visually stunning dessert that features layers of brightly colored cake stacked together to resemble the colors of a rainbow. This delightful treat is perfect for special occasions, birthdays, or any event where you want to add a pop of color and joy to your celebration.',
     'incredients': '''
@@ -614,7 +614,7 @@ This rainbow cake is sure to be a showstopper at any celebration!
   },
   {
     'title': 'chicken Pizza',
-    'time': '42',
+    'time':'42',
     'description':
         'Chicken pizza is a flavorful and satisfying dish that combines a crispy homemade crust with savory toppings. Shredded seasoned chicken, vibrant bell peppers, onions, and mushrooms are layered on a bed of rich pizza sauce and melted mozzarella cheese. Baked to perfection, this homemade pizza is topped with a sprinkle of oregano for added aroma. Its a delicious and customizable treat that brings the classic pizzeria experience to your own kitchen.',
     'incredients': '''
@@ -669,7 +669,7 @@ Enjoy your delicious homemade chicken pizza!
   },
   {
     'title': 'Orange punch',
-    'time': '8',
+    'time':'8',
     'description':
         'Refreshingly citrusy and sweet, this Orange Punch Drink is a vibrant and satisfying beverage that perfect for any occasion. Its zesty orange flavor, combined with a hint of tanginess, creates a thirst-quenching experience that will leave you wanting more.',
     'incredients': '''
@@ -712,7 +712,7 @@ This delightful punch is perfect for parties, gatherings, or simply as a tasty a
   },
   {
     'title': 'Mint Lime',
-    'time': '5',
+    'time':'5',
     'description':
         'Mint Lime Cooler is a refreshing and vibrant drink that combines the zesty tang of fresh lime juice with the cooling essence of mint. Sweetened with a hint of mint-infused simple syrup, this thirst-quenching beverage is served over ice for a perfect balance of citrusy and herbal flavors. Garnished with fresh mint sprigs and lime slices, it an invigorating choice for warm days or a delightful addition to any occasion.',
     'incredients': '''
@@ -771,7 +771,7 @@ Future<void> addDatainitialy() async {
         description: Map['description']!,
         procedure: Map['procedure']!,
         category: Map['category']!,
-        favoritesUserIds: [],
+        favoritesUserIds: [], 
         incredients: Map['incredients']!,
         time: Map['time']!,
       );

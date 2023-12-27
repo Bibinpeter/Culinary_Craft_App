@@ -47,8 +47,8 @@ class _ShowpState extends State<Showp> {
             top: screenSize.height * 0.12, // Adjusted for different screen sizes
             left: screenSize.width * 0.3, // Adjusted for different screen sizes
             child: Center(
-              child: Image.asset(
-                'assets/images/applogo.png',
+              child: Image.asset( 
+                'assets/images/male-chef.png',
                 width: screenSize.width * 0.4, // Adjusted for different screen sizes
                 height: screenSize.width * 0.4, // Adjusted for different screen sizes
               ),
