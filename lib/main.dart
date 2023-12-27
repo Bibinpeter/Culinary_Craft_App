@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:prj1/adminpages/constants/constants.dart';
 import 'package:prj1/indropages/showp.dart';
@@ -12,12 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Hive.registerAdapter(RecipeAdapter());
   await Hive.initFlutter();
-
-  if (kIsWeb) {
-    await Firebase.initializeApp();
-  } else {
-    await Firebase.initializeApp();
-  }
+  await Firebase.initializeApp();
+  
    addDatainitialy();
   runApp(const MyApp());
 }
